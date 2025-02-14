@@ -48,7 +48,9 @@ class UserController extends Controller
         ]);// If Email Or Pasword Is Wrong
     }
 
-    public function doLogout(){
-        
+    public function doLogout(Request $request): RedirectResponse
+    {
+        $request->session()->forget('email');
+        return redirect('/');
     }
 }
