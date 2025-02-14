@@ -21,6 +21,22 @@ class UserControllerTest extends TestCase
         $this->get('/login')->assertSeeText('Login');
     } // Test Login Page 
 
+    public function testLoginPageForMember(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->get('/login')->assertRedirect('/');
+    }
+
+    public function testLoginForUserAlreadyLogin()
+    {
+        $this->withSession([
+            "email" => "eko@localhost"
+        ])->post('/login', [
+            "email" => "eko@localhost",
+            "password" => "rahasia"
+        ])->assertRedirect("/");
+    }
+
     public function testLoginSuccess(){
         $this->seed(UserSeeder::class);
         $this->post('/login', [

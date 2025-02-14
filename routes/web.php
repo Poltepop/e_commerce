@@ -9,7 +9,7 @@ Route::get('/', function () {
 
 
 Route::controller(UserController::class)->group(function(){
-    route::get('/login', 'login');  
-    route::post('/login', 'doLogin');  
+    route::get('/login', 'login')->middleware(['OnlyGuestMiddleware']);  
+    route::post('/login', 'doLogin')->middleware(['OnlyGuestMiddleware']);  
     route::post('/logout', 'doLogout');  
 });
