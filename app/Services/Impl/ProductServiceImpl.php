@@ -21,4 +21,9 @@ class ProductServiceImpl implements ProductService
 
         $product->save();
     }
+    
+    public function getProduct(): array
+    {
+        return Product::query()->get()->toArray();
+    }
 }
