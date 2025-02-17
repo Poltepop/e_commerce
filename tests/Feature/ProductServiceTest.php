@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class ProductServiceTest extends TestCase
 {
-    use RefreshDatabase;
+    // use RefreshDatabase;
 
     private ProductService $productService;
     
@@ -50,5 +50,13 @@ class ProductServiceTest extends TestCase
         self::assertEquals(1, sizeof($this->productService->getProduct()));
         $this->productService->removeProduct(1);
         self::assertEquals(0, sizeof($this->productService->getProduct()));
+    }
+
+    public function testUpdateProduct(){
+        $this->seed(ProductSeeder::class);
+
+        $this->productService->updateProduct("1","Ayam Bakar","ayam-bakar","20.000","3.3",null,null,"active");
+
+        self::assertEquals(1, sizeof($this->productService->getProduct()));
     }
 }

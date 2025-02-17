@@ -34,4 +34,19 @@ class ProductServiceImpl implements ProductService
             $product->delete();
         }
     }
+
+    public function updateProduct(int $id,string $name, string $slug,string $price,string $weight,?string $short_description, ?string $description, string $status)
+    {
+        $product = Product::query()->find($id);
+        if($product != null){
+            $product->name = $name;
+            $product->slug = $slug;
+            $product->price = $price;
+            $product->weight = $weight;
+            $product->short_description = $short_description;
+            $product->description = $description;
+            $product->status = $status;
+            $product->update();
+        }
+    }
 }
