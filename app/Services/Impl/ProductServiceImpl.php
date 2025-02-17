@@ -26,4 +26,12 @@ class ProductServiceImpl implements ProductService
     {
         return Product::query()->get()->toArray();
     }
+
+    public function removeProduct(int $id)
+    {
+        $product = Product::query()->find($id);
+        if($product != null){
+            $product->delete();
+        }
+    }
 }

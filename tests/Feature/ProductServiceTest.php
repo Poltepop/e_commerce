@@ -44,4 +44,11 @@ class ProductServiceTest extends TestCase
 
         self::assertCount(1, $this->productService->getProduct());
     }
+    public function testRemoveProduct(){
+        $this->seed(ProductSeeder::class);
+
+        self::assertEquals(1, sizeof($this->productService->getProduct()));
+        $this->productService->removeProduct(1);
+        self::assertEquals(0, sizeof($this->productService->getProduct()));
+    }
 }
