@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class ProductServiceTest extends TestCase
 {
-    // use RefreshDatabase;
+    use RefreshDatabase;
 
     private ProductService $productService;
     
@@ -57,6 +57,10 @@ class ProductServiceTest extends TestCase
 
         $this->productService->updateProduct("1","Ayam Bakar","ayam-bakar","20.000","3.3",null,null,"active");
 
-        self::assertEquals(1, sizeof($this->productService->getProduct()));
+        $product = $this->productService->getProduct();
+        foreach ($product as $value) {
+             self::assertEquals("1", $value['id']);
+             self::assertEquals("Ayam Bakar", $value['name']);
+        }
     }
 }
