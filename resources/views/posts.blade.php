@@ -35,32 +35,32 @@
           <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
+            <th>Price</th>
+            <th>Weight</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Created_at</th>
+            <th>Updated_at</th>
+            <th>action</th>
           </tr>
         </thead>
         <tbody>
           <!-- row 1 -->
+          @foreach ($products as $product)
           <tr class="hover">
             <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
+            <td>{{ $product['name'] }}</td>
+            <td>{{ $product['price'] }}</td>
+            <td>{{ $product['weight'] }}</td>
+            <td>{{ $product['description'] }}</td>
+            <td>{{ $product['status'] }}</td>
+            <td>{{ $product['created_at'] }}</td>
+            <td>{{ $product['updated_at'] }}</td>
+            <td>
+              <button type="submit">Remove</button>
+            </td>
           </tr>
-          <!-- row 2 -->
-          <tr class="hover">
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          <!-- row 3 -->
-          <tr class="hover">
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
+          @endforeach
         </tbody>
       </table>
     </div>

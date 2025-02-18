@@ -32,7 +32,7 @@ class UserServiceTest extends TestCase
         self::assertFalse($this->userService->login('eko','rahasia'));
     }
     
-    public function testLoginWrongPassword(){
+        public function testLoginWrongPassword(){
         $this->seed(UserSeeder::class);
         self::assertFalse($this->userService->login('eko@localhost','Salah'));
     }
