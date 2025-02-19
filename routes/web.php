@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class, 'home']);
 
 Route::get('/homepage',function(){
-    return view('homepage');
+    return view('admin.homepage');
 });
 
 // Route::get('/posts',function(){
@@ -17,9 +17,9 @@ Route::get('/homepage',function(){
 
 Route::controller(ProductController::class)->middleware(['OnlyMemberMiddleware'])->group(function (){
     route::get('/posts', 'product');
-    route::get('/product', 'addAndUpdateProduct');
-    route::get('/product/{id}/update', 'addAndUpdateProduct');
-    route::post('/product', 'addProduct');
+    route::get('/product/create', 'addProductView')->name('form.product');
+    route::get('/product/{id}/update', 'UpdateProductView');
+    route::post('/product/create', 'addProduct')->name('save.product');
     route::post('/product/{id}/update', 'updateProduct');
     route::post('/product/{id}/delete', 'removeProduct');
 });
