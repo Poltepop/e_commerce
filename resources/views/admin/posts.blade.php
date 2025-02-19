@@ -2,7 +2,7 @@
   <x-content>
     <div class="breadcrumbs text-sm">
       <ul>
-        <li><a>Homepage</a></li>
+        <li><a href="/homepage">Homepage</a></li>
         <li>Posts</li>
       </ul>
     </div>
@@ -12,10 +12,8 @@
       <input type="text" placeholder="Serch"class="input input-bordered w-full max-w-xs" />
 
       <div class="divider divider-horizontal"></div>
-      <select class="select select-bordered  max-w-xs">
-        <option>Create</option>
-        <option>Update</option>
-      </select>
+      <a href="{{ route('form.product') }}" class="btn btn-neutral mr-2">Create</a>
+      {{-- <a href="" class="btn btn-neutral">Update</a> --}}
     </div>
     <hr>
 
@@ -49,13 +47,13 @@
           @foreach ($products as $product)
           <tr class="hover">
             <th>1</th>
-            <td>{{ $product['name'] }}</td>
-            <td>{{ $product['price'] }}</td>
-            <td>{{ $product['weight'] }}</td>
-            <td>{{ $product['description'] }}</td>
-            <td>{{ $product['status'] }}</td>
-            <td>{{ $product['created_at'] }}</td>
-            <td>{{ $product['updated_at'] }}</td>
+            <td>{{ $product->name }}</td>
+            <td>{{ $product->price }}</td>
+            <td>{{ $product->weight }}</td>
+            <td>{{ $product->description }}</td>
+            <td>{{ $product->status }}</td>
+            <td>{{ $product->created_at->diffForHumans() }}</td>
+            <td>{{ $product->updated_at->diffForHumans() }}</td>
             <td>
               <button type="submit">Remove</button>
             </td>
