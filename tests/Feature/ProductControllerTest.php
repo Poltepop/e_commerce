@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Product;
 use Database\Seeders\ProductSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -43,5 +44,13 @@ class ProductControllerTest extends TestCase
             'short_description' => 'halo',
             'description' => 'halo',
         ])->assertValid()->assertRedirect('/posts');
+    }
+
+    public function testRemoveProduct(){
+        $this->seed(ProductSeeder::class);
+
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/product/1/delete')->assertRedirect('/posts');
     }
 }

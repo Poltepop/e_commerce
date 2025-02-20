@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
 {
@@ -55,9 +56,10 @@ class ProductController extends Controller
 
     }
 
-    public function removeProduct(Request $request)
+    public function removeProduct(Request $request, int $id): RedirectResponse
     {
-
+        $this->productService->removeProduct($id);
+        return redirect()->action([ProductController::class, 'product']);
     }
 
 }

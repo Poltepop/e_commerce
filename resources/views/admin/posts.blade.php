@@ -55,7 +55,10 @@
             <td>{{ $product->created_at->diffForHumans() }}</td>
             <td>{{ $product->updated_at->diffForHumans() }}</td>
             <td>
-              <button type="submit">Remove</button>
+              <form action="/product/{{ $product->id }}/delete" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-outline btn-error">Remove</button>
+              </form>
             </td>
           </tr>
           @endforeach
