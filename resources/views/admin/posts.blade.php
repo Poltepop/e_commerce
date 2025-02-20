@@ -36,6 +36,7 @@
             <th>Price</th>
             <th>Weight</th>
             <th>Description</th>
+            <th>short_Description</th>
             <th>Status</th>
             <th>Created_at</th>
             <th>Updated_at</th>
@@ -51,13 +52,17 @@
             <td>{{ $product->price }}</td>
             <td>{{ $product->weight }}</td>
             <td>{{ $product->description }}</td>
+            <td>{{ $product->short_description }}</td>
             <td>{{ $product->status }}</td>
             <td>{{ $product->created_at->diffForHumans() }}</td>
             <td>{{ $product->updated_at->diffForHumans() }}</td>
-            <td>
-              <form action="/product/{{ $product->id }}/delete" method="POST">
+            <td class="flex">
+              <form action="{{ route('delete.product', $product->id) }}" method="POST" class="mr-1">
                 @csrf
                 <button type="submit" class="btn btn-outline btn-error">Remove</button>
+              </form>
+              <form action="{{ route('form.update.product', $product->id) }}" method="get">
+                <button type="submit" class="btn btn-outline btn-primary">Update</button>
               </form>
             </td>
           </tr>

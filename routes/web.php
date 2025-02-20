@@ -18,10 +18,10 @@ Route::get('/homepage',function(){
 Route::controller(ProductController::class)->middleware(['OnlyMemberMiddleware'])->group(function (){
     route::get('/posts', 'product');
     route::get('/product/create', 'addProductView')->name('form.product');
-    route::get('/product/{id}/update', 'UpdateProductView');
+    route::get('/product/{id}/update', 'UpdateProductView')->name('form.update.product');
     route::post('/product/create', 'addProduct')->name('save.product');
-    route::post('/product/{id}/update', 'updateProduct');
-    route::post('/product/{id}/delete', 'removeProduct');
+    route::post('/product/{id}/update', 'updateProduct')->name('update.product');
+    route::post('/product/{id}/delete', 'removeProduct')->name('delete.product');
 });
 
 

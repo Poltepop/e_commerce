@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,9 +30,12 @@ class ProductController extends Controller
        return response()->view('components.form-input');
     }
     
-    public function updateProductView()
+    public function updateProductView(Request $request, $id)
     {
-
+        $product = Product::find($id);
+        return response()->view('components.form-update', [
+            'product'=> $product
+        ]);
     }
 
     public function addProduct(Request $request): RedirectResponse
@@ -53,7 +57,19 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request, int $id)
     {
+        $product = $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255',
+            'price' => 'required|decimal:2',
+            'weight' => 'required|decimal:2',
+            'short_description' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'status' => 'required|in:active,inactive',
+        ]);
 
+        $this->productService->updateProduct($id,$product['name'],$product['slug'],$product['price'],$product['weight'],$product['short_description'],$product['description'],$product['status']);
+
+        return redirect()->action([ProductController::class, 'product']);
     }
 
     public function removeProduct(Request $request, int $id): RedirectResponse

@@ -47,10 +47,37 @@ class ProductControllerTest extends TestCase
     }
 
     public function testRemoveProduct(){
-        $this->seed(ProductSeeder::class);
-
         $this->withSession([
             'email' => 'eko@localhost'
         ])->post('/product/1/delete')->assertRedirect('/posts');
+    }
+
+    public function testUpdateProductSuccess(){
+        $this->seed(ProductSeeder::class);
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/product/1/update', [
+            'name' => 'ayam',
+            'slug' => 'ayam',
+            'price' => '10.00',
+            'weight' => '10.00',
+            'status' => 'active',
+            'short_description' => 'halo',
+            'description' => 'halo',
+        ])->assertValid()->assertRedirect('/posts');
+    }
+
+    public function testUpdateProductFailed(){
+        $this->seed(ProductSeeder::class);
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/product/1/update',[])
+        ->assertInvalid([
+            'name' => 'The name field is required.',
+            'slug' => 'The slug field is required.',
+            'price' => 'The price field is required.',
+            'weight' => 'The weight field is required.',
+            'status' => 'The status field is required.',
+        ]);
     }
 }
