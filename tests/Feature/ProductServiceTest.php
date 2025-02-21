@@ -26,12 +26,12 @@ class ProductServiceTest extends TestCase
     }   
 
     public function testSaveProducts(){
-       $this->productService->saveProduct("Mie Ayam","mie-ayam","10.000","5.5",null,null,"active");
+       $this->seed(ProductSeeder::class);
 
        $product = $this->productService->getProduct();
        foreach ($product as $value) {
             self::assertEquals("1", $value['id']);
-            self::assertEquals("Mie Ayam", $value['name']);
+            self::assertEquals("SuperStar Jumbo", $value['name']);
        }
     }
 
@@ -40,7 +40,7 @@ class ProductServiceTest extends TestCase
     }
 
     public function testGetProductNotEmpty(){
-        $this->productService->saveProduct("Mie Ayam","mie-ayam","10.000","5.5",null,null,"active");
+        $this->seed(ProductSeeder::class);
 
         self::assertCount(1, $this->productService->getProduct());
     }
@@ -54,13 +54,21 @@ class ProductServiceTest extends TestCase
 
     public function testUpdateProduct(){
         $this->seed(ProductSeeder::class);
-
-        $this->productService->updateProduct("1","Ayam Bakar","ayam-bakar","20.000","3.3",null,null,"active");
-
-        $product = $this->productService->getProduct();
-        foreach ($product as $value) {
-             self::assertEquals("1", $value['id']);
-             self::assertEquals("Ayam Bakar", $value['name']);
-        }
+            $request = [
+                'name' => 'updated',
+                'slug' => 'updated',
+                'price' => '10.00',
+                'weight' => '10.00',
+                'short_description' => null,
+                'description' => null,
+                'status' => 'active'
+            ];
+            
+            $product = $this->productService->updateProduct(1, $request);
+            $product = $this->productService->getProduct();
+            foreach ($product as $value) {
+                self::assertEquals("1", $value->id);
+                self::assertEquals("updated", $value->name);
+           }
     }
 }

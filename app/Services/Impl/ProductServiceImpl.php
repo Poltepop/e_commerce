@@ -7,18 +7,9 @@ use App\Services\ProductService;
 
 class ProductServiceImpl implements ProductService
 {
-    public function saveProduct(string $name, string $slug,string $price,string $weight,?string $short_description, ?string $description, string $status): void
+    public function saveProduct(array $product): void
     {
-        $product = new Product([
-            'name' => "$name",
-            'slug' => "$slug",
-            'price' => "$price",
-            'weight' => "$weight",
-            'short_description' => "$short_description",
-            'description' => "$description",
-            'status' => $status,
-        ]);
-
+        $product = new Product($product);
         $product->save();
     }
     
@@ -36,18 +27,8 @@ class ProductServiceImpl implements ProductService
         }
     }
 
-    public function updateProduct(int $id,string $name, string $slug,string $price,string $weight,?string $short_description, ?string $description, string $status)
+    public function updateProduct(int $id,array $product)
     {
-        $product = Product::query()->find($id);
-        if($product != null){
-            $product->name = $name;
-            $product->slug = $slug;
-            $product->price = $price;
-            $product->weight = $weight;
-            $product->short_description = $short_description;
-            $product->description = $description;
-            $product->status = $status;
-            $product->update();
-        }
+        return Product::find($id)->update($product);
     }
 }

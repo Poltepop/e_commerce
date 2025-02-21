@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 
 class ProductController extends Controller
@@ -17,7 +18,7 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function product(Request $request)
+    public function product(Request $request): Response
     {
         $product = $this->productService->getproduct();
         return response()->view('admin.posts',[
@@ -25,12 +26,12 @@ class ProductController extends Controller
         ]);
     }
 
-    public function addProductView(Request $request)
+    public function addProductView(Request $request): Response
     {
        return response()->view('components.form-input');
     }
     
-    public function updateProductView(Request $request, $id)
+    public function updateProductView(Request $request, $id): Response
     {
         $product = Product::find($id);
         return response()->view('components.form-update', [
@@ -50,12 +51,12 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        $this->productService->saveProduct($product['name'],$product['slug'],$product['price'],$product['weight'],$product['short_description'],$product['description'],$product['status']);
+        $this->productService->saveProduct($product);
 
         return redirect()->action([ProductController::class, 'product']);
     }
 
-    public function updateProduct(Request $request, int $id)
+    public function updateProduct(Request $request, int $id): RedirectResponse
     {
         $product = $request->validate([
             'name' => 'required|string|max:255',
@@ -67,7 +68,7 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        $this->productService->updateProduct($id,$product['name'],$product['slug'],$product['price'],$product['weight'],$product['short_description'],$product['description'],$product['status']);
+        $this->productService->updateProduct($id,$product);
 
         return redirect()->action([ProductController::class, 'product']);
     }
