@@ -27,8 +27,8 @@ class ProductServiceImpl implements ProductService
         }
     }
 
-    public function updateProduct(int $id,array $product)
+    public function updateProduct(string $slug,array $product)
     {
-        return Product::find($id)->update($product);
+        return Product::where('slug',$slug)->update($product);
     }
 }

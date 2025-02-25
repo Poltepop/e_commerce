@@ -61,7 +61,7 @@
                 @csrf
                 <button type="submit" class="btn btn-outline btn-error">Remove</button>
               </form>
-              <form action="{{ route('form.update.product', $product->id) }}" method="get">
+              <form action="{{ route('form.update.product', $product->slug) }}" method="get">
                 <button type="submit" class="btn btn-outline btn-primary">Update</button>
               </form>
             </td>

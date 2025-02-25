@@ -10,5 +10,5 @@ interface ProductService
 
     public function removeProduct(int $id);
 
-    public function updateProduct(int $id, array $product);
+    public function updateProduct(string $slug, array $product);
 };

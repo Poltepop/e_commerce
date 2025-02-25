@@ -18,7 +18,7 @@ class ProductController extends Controller
         $this->productService = $productService;
     }
 
-    public function product(Request $request): Response
+    public function product(): Response
     {
         $product = $this->productService->getproduct();
         return response()->view('admin.posts',[
@@ -26,14 +26,14 @@ class ProductController extends Controller
         ]);
     }
 
-    public function addProductView(Request $request): Response
+    public function addProductView(): Response
     {
        return response()->view('components.form-input');
     }
     
-    public function updateProductView(Request $request, $id): Response
+    public function updateProductView($slug): Response
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
         return response()->view('components.form-update', [
             'product'=> $product
         ]);
@@ -43,7 +43,7 @@ class ProductController extends Controller
     {   
         $product = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:255',
+            // 'slug' => 'required|string|max:255',
             'price' => 'required|decimal:2',
             'weight' => 'required|decimal:2',
             'short_description' => 'nullable|string|max:255',
@@ -56,7 +56,7 @@ class ProductController extends Controller
         return redirect()->action([ProductController::class, 'product']);
     }
 
-    public function updateProduct(Request $request, int $id): RedirectResponse
+    public function updateProduct(Request $request, string $slug): RedirectResponse
     {
         $product = $request->validate([
             'name' => 'required|string|max:255',
@@ -68,7 +68,7 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        $this->productService->updateProduct($id,$product);
+        $this->productService->updateProduct($slug,$product);
 
         return redirect()->action([ProductController::class, 'product']);
     }

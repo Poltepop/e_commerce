@@ -36,7 +36,7 @@
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror --}}
 
-          <form action="{{ route('update.product', $product->id) }}" method="post">  
+          <form action="{{ route('update.product', $product->slug) }}" method="post">  
             @csrf
             <div class="flex flex-col justify-center">
                 <select class="select select-bordered w-full mb-2" name="status">
