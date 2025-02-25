@@ -25,7 +25,6 @@ class ProductControllerTest extends TestCase
             'email' => 'eko@localhost'
         ])->post('/product/create',[])->assertInvalid([
             'name' => 'The name field is required.',
-            'slug' => 'The slug field is required.',
             'price' => 'The price field is required.',
             'weight' => 'The weight field is required.',
             'status' => 'The status field is required.',
@@ -37,7 +36,6 @@ class ProductControllerTest extends TestCase
             'email' => 'eko@localhost'
         ])->post('/product/create',[
             'name' => 'ayam',
-            'slug' => 'ayam',
             'price' => '10.00',
             'weight' => '10.00',
             'status' => 'active',
@@ -56,9 +54,8 @@ class ProductControllerTest extends TestCase
         $this->seed(ProductSeeder::class);
         $this->withSession([
             'email' => 'eko@localhost'
-        ])->post('/product/1/update', [
+        ])->post('/product/superstar-jumbo/update', [
             'name' => 'ayam',
-            'slug' => 'ayam',
             'price' => '10.00',
             'weight' => '10.00',
             'status' => 'active',
@@ -71,10 +68,9 @@ class ProductControllerTest extends TestCase
         $this->seed(ProductSeeder::class);
         $this->withSession([
             'email' => 'eko@localhost'
-        ])->post('/product/1/update',[])
+        ])->post('/product/superstar-jumbo/update',[])
         ->assertInvalid([
             'name' => 'The name field is required.',
-            'slug' => 'The slug field is required.',
             'price' => 'The price field is required.',
             'weight' => 'The weight field is required.',
             'status' => 'The status field is required.',

@@ -56,7 +56,6 @@ class ProductServiceTest extends TestCase
         $this->seed(ProductSeeder::class);
             $request = [
                 'name' => 'updated',
-                'slug' => 'updated',
                 'price' => '10.00',
                 'weight' => '10.00',
                 'short_description' => null,
@@ -64,11 +63,12 @@ class ProductServiceTest extends TestCase
                 'status' => 'active'
             ];
             
-            $product = $this->productService->updateProduct(1, $request);
+            $product = $this->productService->updateProduct('superstar-jumbo', $request);
             $product = $this->productService->getProduct();
             foreach ($product as $value) {
                 self::assertEquals("1", $value->id);
                 self::assertEquals("updated", $value->name);
+                self::assertNotNull($value->slug);
            }
     }
 }
