@@ -38,28 +38,6 @@
 
           <form action="{{ route('save.product') }}" method="post">  
             @csrf
-            {{-- <div class="flex flex-col justify-center">
-                <select class="select select-bordered w-full mb-2" name="status">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
-                <div class="flex flex-row justify-between mb-2">
-                    <input name="name" type="text" placeholder="Name" class="input input-bordered w-full mr-1"/>
-                    <input name="slug" type="text" placeholder="Slug" class="input input-bordered w-full ml-1" disabled/>
-                </div>
-                <input name="price" type="text" placeholder="price" class="input input-bordered w-full mb-2"/>
-                <input name="weight" type="text" placeholder="Weight" class="input input-bordered w-full mb-2"/>
-                <div class="flex flex-row justify-between mb-2">
-                    <textarea name="short_description" class="textarea textarea-bordered w-full mr-1" placeholder="Short Description"></textarea>
-                    <textarea name="description" class="textarea textarea-bordered w-full ml-1" placeholder="Description"></textarea>
-                </div>
-            </div> --}}
-
-            {{-- <div class="mt-8">
-                <p class="text-xs font-thin mb-1">*Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur architecto quod non..</p>
-                <button class="btn btn-outline btn-accent w-60" type="submit">Save</button>
-            </div> --}}
-
             <div class="flex">
               {{-- right --}}
               <div class="rounded-box flex-col flex-grow place-items-center mr-4 w-1/3">
@@ -125,7 +103,7 @@
                       </div>
                     </div>
                   </div>
-
+                  
                   <div class="flex-row mt-5">
                     <button class="btn btn-sm btn-outline btn-success">Create</button>
                     <a href="/posts" class="btn btn-sm btn-outline btn-error">Cencel</a>
@@ -170,7 +148,6 @@
                   </div>
                 </div>
               </div>
-
             </div>
           </form>
     </x-content>
