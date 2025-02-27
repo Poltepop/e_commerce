@@ -25,16 +25,22 @@ class Product extends Model
         static::creating(function ($product) {
             $product->slug = static::generateUniqueSlug($product->name);
         });
+
+        static::updating(function ($product){
+            if($product->isDirty('name')){
+                $product->slug = static::generateUniqueSlug($product->name, $product->id);
+            }
+        });
         
     }
 
-    public static function generateUniqueSlug($name)
+    public static function generateUniqueSlug($name, $id = null)
     {
         $slug = Str::slug($name);
         $originalSlug = $slug;
         $count = 1;
 
-        while (self::where('slug', $slug)->exists()) {
+        while (self::where('slug', $slug)->where('id', '!=', $id)->exists()) {
             $slug = $originalSlug . '-' . $count;
             $count++;
         }

@@ -48,7 +48,7 @@ class ProductController extends Controller
             'weight' => 'required|decimal:2',
             'short_description' => 'nullable|string|max:255',
             'description' => 'nullable|string|max:255',
-            'status' => 'required|in:active,inactive',
+            'status' => 'in:active,inactive',
         ]);
 
         $this->productService->saveProduct($product);
@@ -64,7 +64,7 @@ class ProductController extends Controller
             'weight' => 'required|decimal:2',
             'short_description' => 'nullable|string|max:255',
             'description' => 'nullable|string|max:255',
-            'status' => 'required|in:active,inactive',
+            'status' => 'in:active,inactive',
         ]);
 
         $this->productService->updateProduct($slug,$product);
