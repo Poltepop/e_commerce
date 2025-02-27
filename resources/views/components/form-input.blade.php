@@ -73,8 +73,8 @@
                   </div>
                   {{-- File Input --}}
                   <div class="card rounded-box bg-base-100 h-auto w-full mt-5">
-                    <div class="border-b-2 w-full">
-                      <h1 class="font-bold rounded-lg p-4">Image</h1>
+                    <div class="border-b-2 w-full  border-gray-700">
+                      <h1 class="font-bold rounded-lg p-4 ">Image</h1>
                     </div>
                     <div class="p-5">
                       <input type="file" class="file-input file-input-bordered file-input-lg w-full" />
@@ -83,7 +83,7 @@
                   
                   {{-- Pricing--}}
                   <div class="card rounded-box bg-base-100 h-auto w-full mt-5">
-                    <div class="border-b-2 w-full">
+                    <div class="border-b-2 w-full  border-gray-700">
                       <h1 class="font-bold rounded-lg p-4">Pricing</h1>
                     </div>
                     <div class="p-5">
@@ -103,9 +103,9 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="flex-row mt-5">
-                    <button class="btn btn-sm btn-outline btn-success">Create</button>
+                    <button class="btn btn-sm btn-outline btn-accent">Create</button>
                     <a href="/posts" class="btn btn-sm btn-outline btn-error">Cencel</a>
                   </div>
               </div>
@@ -113,7 +113,7 @@
               {{-- left --}}
               <div class="rounded-box flex-col flex-grow place-items-center max-w-xs">
                 <div class="card rounded-box bg-base-100 h-auto w-full">
-                  <div class="border-b-2 w-full">
+                  <div class="border-b-2 w-full  border-gray-700">
                     <h1 class="font-bold rounded-lg p-4">Status</h1>
                   </div>
                   <div class="p-5">
@@ -129,7 +129,7 @@
 
                 <div class="rounded-box flex-col flex-grow place-items-center max-w-xs mt-5">
                   <div class="card rounded-box bg-base-100 h-auto w-full">
-                    <div class="border-b-2 w-full">
+                    <div class="border-b-2 w-full border-gray-700">
                       <h1 class="font-bold rounded-lg p-4">Associations </h1>
                     </div>
                     <div class="p-5">
@@ -137,7 +137,7 @@
                         <div class="label">
                           <span class="label-text text-gray-50 text-xs">Category</span>
                         </div>
-                        <select class="select select-bordered select-sm w-full max-w-xs">
+                        <select class="select select-bordered w-full max-w-xs">
                           <option disabled selected>Small</option>
                           <option>Small Apple</option>
                           <option>Small Orange</option>

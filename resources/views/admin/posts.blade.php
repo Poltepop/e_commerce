@@ -7,12 +7,12 @@
       </ul>
     </div>
     <div class="flex pt-4 mb-5">
-      <h1 class="text-4xl mr-5">Posts</h1>
+      <h1 class="text-4xl mr-5 text-gray-50 font-bold">Posts</h1>
 
       <input type="text" placeholder="Serch"class="input input-bordered w-full max-w-xs" />
 
       <div class="divider divider-horizontal"></div>
-      <a href="{{ route('form.product') }}" class="btn btn-neutral mr-2">Create</a>
+      <a href="{{ route('form.product') }}" class="btn btn-outline btn-accent mr-2">Create</a>
       {{-- <a href="" class="btn btn-neutral">Update</a> --}}
     </div>
     <hr>
