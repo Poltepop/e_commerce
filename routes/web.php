@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -31,4 +32,8 @@ Route::controller(UserController::class)->group(function(){
     route::get('/login', 'login')->middleware(['OnlyGuestMiddleware']);  
     route::post('/login', 'doLogin')->middleware(['OnlyGuestMiddleware']);  
     route::post('/logout', 'doLogout')->middleware(['OnlyMemberMiddleware']);  
+});
+
+Route::controller(CategoryController::class)->middleware(['OnlyMemberMiddleware'])->group(function(){
+    route::get('/categories','category');
 });
