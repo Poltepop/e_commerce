@@ -74,6 +74,8 @@
                 <th>Description</th>
                 <th>Short Description</th>
                 <th>Status</th>
+                <th>Creted_at</th>
+                <th>Updated_at</th>
               </tr>
             </thead>
             <tbody>
@@ -104,6 +106,8 @@
                   <td>{{ $product->short_description }}</td>
                   <td>{{ $product->description }}</td>
                   <td>{{ $product->status }}</td>
+                  <td>{{ $product->created_at }}</td>
+                  <td>{{ $product->updated_at }}</td>
                   <td class="flex mt-3">
                     <form action="{{ route('form.update.product', $product->slug) }}" method="get">
                       <button type="submit" class="btn btn-outline btn-accent btn-xs">Update</button>
@@ -128,6 +132,8 @@
                 <th>Short Description</th>
                 <th>Description</th>
                 <th>Status</th>
+                <th>Creted_at</th>
+                <th>Updated_at</th>
                 <th></th>
               </tr>
             </tfoot>
