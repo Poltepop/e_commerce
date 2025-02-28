@@ -3,7 +3,7 @@
         <div class="breadcrumbs text-sm">
             <ul>
               <li><a href="/homepage">Homepage</a></li>
-              <li><a href="/posts">Posts</a></li>
+              <li><a href="/posts">Products</a></li>
               <li>Create</li>
             </ul>
           </div>
@@ -106,7 +106,7 @@
 
                   <div class="flex-row mt-5">
                     <button class="btn btn-sm btn-outline btn-accent">Create</button>
-                    <a href="/posts" class="btn btn-sm btn-outline btn-error">Cencel</a>
+                    <a href="/products" class="btn btn-sm btn-outline btn-error">Cencel</a>
                   </div>
               </div>
 
