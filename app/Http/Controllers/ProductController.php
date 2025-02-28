@@ -22,20 +22,24 @@ class ProductController extends Controller
     {
         $product = $this->productService->getproduct();
         return response()->view('admin.products',[
+            'title' => 'Products',
             'products' => $product
         ]);
     }
 
     public function addProductView(): Response
     {
-       return response()->view('components.form-input');
+       return response()->view('components.form-input',[
+        'title' => 'Form-Create'
+       ]);
     }
     
     public function updateProductView($slug): Response
     {
         $product = Product::where('slug', $slug)->first();
         return response()->view('components.form-update', [
-            'product'=> $product
+            'title' => 'Form-Update',
+            'product'=> $product,
         ]);
     }
 

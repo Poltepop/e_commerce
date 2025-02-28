@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomeController::class, 'home']);
 
 Route::get('/homepage',function(){
-    return view('admin.homepage');
+    return view('admin.homepage',[
+        'title' => 'Homepage',
+    ]);
 });
 
 // Route::get('/posts',function(){

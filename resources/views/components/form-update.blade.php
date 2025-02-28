@@ -1,4 +1,5 @@
 <x-layout>
+  <x-slot:title>{{ $title }}</x-slot:title>
     <x-content>
         <div class="breadcrumbs text-sm">
             <ul>
