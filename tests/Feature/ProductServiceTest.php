@@ -36,7 +36,7 @@ class ProductServiceTest extends TestCase
     }
 
     public function testGetProductEmpty(){
-        self::assertEquals([],$this->productService->getProduct());
+        self::assertCount(0,$this->productService->getProduct());
     }
 
     public function testGetProductNotEmpty(){
