@@ -16,7 +16,7 @@ Route::get('/homepage',function(){
 // });
 
 Route::controller(ProductController::class)->middleware(['OnlyMemberMiddleware'])->group(function (){
-    route::get('/posts', 'product');
+    route::get('/products', 'product');
     route::get('/product/create', 'addProductView')->name('form.product');
     route::get('/product/{product:slug}/update', 'UpdateProductView')->name('form.update.product');
     route::post('/product/create', 'addProduct')->name('save.product');
