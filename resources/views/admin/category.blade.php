@@ -26,7 +26,7 @@
             </label>
       
             <div class="divider divider-horizontal"></div>
-            <a href="{{ route('form.product') }}" class="btn btn-outline btn-accent mr-2">Create</a>
+            <a href="{{ route('form.input.category') }}" class="btn btn-outline btn-accent mr-2">Create</a>
           </div>
 
           {{-- Paginate --}}
