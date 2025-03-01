@@ -15,7 +15,10 @@
             <p class="font-light text-sm text-gray-50">Add Your Category here</p>
           </div>
 
-          <form action="" method="post">
+          @error('name')
+          <x-alert-form>Error! {{ $message }}.</x-alert-form>
+          @enderror
+          <form action="{{ route('save.category') }}" method="post">
           @csrf
           <div class="card w-full bg-base-100">
             <div class="border-b-2 border-gray-700 w-full p-4">

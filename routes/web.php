@@ -37,4 +37,5 @@ Route::controller(UserController::class)->group(function(){
 Route::controller(CategoryController::class)->middleware(['OnlyMemberMiddleware'])->group(function(){
     route::get('/categories','category');
     route::get('/category/create','addCategoryView')->name('form.input.category');
+    route::post('/category/create', 'addCategory')->name('save.category');
 });
