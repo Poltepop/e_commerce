@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,15 @@ class CategoryController extends Controller
         ]);
         
         $this->categoryService->saveCategory($category);
-        
+
         return redirect()->action([CategoryController::class, 'category']);
+    }
+
+    public function updateCategoryView($slug){
+        $category = Category::where('slug', $slug)->first();
+        return response()->view('components.form-update-category', [
+            'title' => 'Update Category',
+            'category' => $category
+        ]);
     }
 }

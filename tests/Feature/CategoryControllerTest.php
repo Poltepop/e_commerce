@@ -40,4 +40,10 @@ class CategoryControllerTest extends TestCase
             'name' => 'The name field is required.'
         ]);
     }
+
+    public function testUpdateViewCategory(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->get('/category/dummy/update')->assertSeeText('Update Category');
+    }
 }
