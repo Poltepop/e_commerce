@@ -18,9 +18,26 @@ class CategoryControllerTest extends TestCase
         ])->get('/categories')->assertSeeText('FOOD');
     }
 
-    public function testViewCategory(){
+    public function testAddViewCategory(){
         $this->withSession([
             'email' => 'eko@localhost'
         ])->get('/category/create')->assertSeeText('Add Category');
+    }
+
+    public function testAddCategoryControllerSuccess(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/category/create',[
+            'name' => 'dummy test'
+        ])->assertRedirect('/categories');
+    }
+
+    public function testAddCategoryControllerFailed(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/category/create',[])
+        ->assertInvalid([
+            'name' => 'The name field is required.'
+        ]);
     }
 }

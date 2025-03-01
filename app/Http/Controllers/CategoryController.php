@@ -26,4 +26,14 @@ class CategoryController extends Controller
             'title' => 'Add Category',
         ]);
     }
+
+    public function addCategory(Request $request){
+        $category = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        
+        $this->categoryService->saveCategory($category);
+        
+        return redirect()->action([CategoryController::class, 'category']);
+    }
 }
