@@ -20,4 +20,10 @@ class CategoryController extends Controller
             'categories'=> $category,
         ]);
     }
+
+    public function addCategoryView() {
+        return response()->view('components.form-input-category',[
+            'title' => 'Add Category',
+        ]);
+    }
 }

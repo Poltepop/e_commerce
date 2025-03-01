@@ -17,4 +17,10 @@ class CategoryControllerTest extends TestCase
             'email' => 'eko@localhost'
         ])->get('/categories')->assertSeeText('FOOD');
     }
+
+    public function testViewCategory(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->get('/category/create')->assertSeeText('Add Category');
+    }
 }
