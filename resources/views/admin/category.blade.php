@@ -75,7 +75,7 @@
                         <td>{{ $category->created_at }}</td>
                         <td>{{ $category->updated_at }}</td>
                         <td class="flex mt-3">
-                          <form action="{{ route('form.update.product', $category->slug) }}" method="get">
+                          <form action="{{ route('form.update.category', $category->slug) }}" method="get">
                             <button type="submit" class="btn btn-outline btn-accent btn-xs">Update</button>
                           </form>
                           <form action="{{ route('delete.product', $category->id) }}" method="POST" class="ml-1">
