@@ -78,7 +78,7 @@
                           <form action="{{ route('form.update.category', $category->slug) }}" method="get">
                             <button type="submit" class="btn btn-outline btn-accent btn-xs">Update</button>
                           </form>
-                          <form action="{{ route('delete.product', $category->id) }}" method="POST" class="ml-1">
+                          <form action="{{ route('delete.category', $category->id) }}" method="POST" class="ml-1">
                             @csrf
                             <button type="submit" class="btn btn-outline btn-error btn-xs">Remove</button>
                           </form>

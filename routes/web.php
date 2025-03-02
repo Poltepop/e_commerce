@@ -40,4 +40,5 @@ Route::controller(CategoryController::class)->middleware(['OnlyMemberMiddleware'
     route::get('/category/{category:slug}/update', 'updateCategoryView')->name('form.update.category');
     route::post('/category/create', 'addCategory')->name('save.category');
     route::post('/category/{category:slug}/update', 'updateCategory')->name('update.category');
+    route::post('/category/{id}/delete', 'deleteCategory')->name('delete.category');
 });
