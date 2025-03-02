@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Database\Seeders\CategorySeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PDO;
 use Tests\TestCase;
 
 class CategoryControllerTest extends TestCase
@@ -45,5 +46,21 @@ class CategoryControllerTest extends TestCase
         $this->withSession([
             'email' => 'eko@localhost'
         ])->get('/category/dummy/update')->assertSeeText('Update Category');
+    }
+
+    public function testUpdateCategory(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/category/helo-there/update',[
+            'name' => 'eko'
+        ])->assertRedirect('/categories');
+    }
+
+    public function testUpdateCategoryFailed(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/category/helo-there/update',[])->assertInvalid([
+            'name' => 'The name field is required.'
+        ]);
     }
 }

@@ -45,4 +45,14 @@ class CategoryController extends Controller
             'category' => $category
         ]);
     }
+
+    public function updateCategory(Request $request, string $slug){
+        $category = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $this->categoryService->updateCategory($slug,$category);
+
+        return redirect()->action([CategoryController::class, 'category']);
+    }
 }
