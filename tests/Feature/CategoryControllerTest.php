@@ -63,4 +63,10 @@ class CategoryControllerTest extends TestCase
             'name' => 'The name field is required.'
         ]);
     }
+
+    public function testDeleteCategory(){
+        $this->withSession([
+            'email' => 'eko@localhost'
+        ])->post('/category/1/delete')->assertRedirect('/categories');
+    }
 }

@@ -76,7 +76,7 @@ class ProductController extends Controller
         return redirect()->action([ProductController::class, 'product']);
     }
 
-    public function removeProduct(Request $request, int $id): RedirectResponse
+    public function removeProduct(int $id): RedirectResponse
     {
         $this->productService->removeProduct($id);
         return redirect()->action([ProductController::class, 'product']);

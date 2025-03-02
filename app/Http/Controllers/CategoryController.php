@@ -55,4 +55,9 @@ class CategoryController extends Controller
 
         return redirect()->action([CategoryController::class, 'category']);
     }
+
+    public function deleteCategory($id){
+        $this->categoryService->removeCategory($id);
+        return redirect()->action([CategoryController::class, 'category']);
+    }
 }
