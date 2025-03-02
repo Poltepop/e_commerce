@@ -23,8 +23,8 @@ Route::controller(ProductController::class)->middleware(['OnlyMemberMiddleware']
     route::get('/product/create', 'addProductView')->name('form.product');
     route::get('/product/{product:slug}/update', 'UpdateProductView')->name('form.update.product');
     route::post('/product/create', 'addProduct')->name('save.product');
-    route::post('/product/{id}/update', 'updateProduct')->name('update.product');
-    route::post('/product/{product:slug}/delete', 'removeProduct')->name('delete.product');
+    route::post('/product/{product:slug}/update', 'updateProduct')->name('update.product');
+    route::post('/product/{id}/delete', 'removeProduct')->name('delete.product');
 });
 
 
@@ -39,4 +39,5 @@ Route::controller(CategoryController::class)->middleware(['OnlyMemberMiddleware'
     route::get('/category/create','addCategoryView')->name('form.input.category');
     route::get('/category/{category:slug}/update', 'updateCategoryView')->name('form.update.category');
     route::post('/category/create', 'addCategory')->name('save.category');
+    route::post('/category/{category:slug}/update', 'updateCategory')->name('update.category');
 });
