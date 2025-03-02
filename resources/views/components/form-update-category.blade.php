@@ -18,7 +18,7 @@
           @error('name')
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror
-          <form action="" method="post">
+          <form action="{{ route('update.category' , $category->slug) }}" method="post">
           @csrf
           <div class="card w-full bg-base-100">
             <div class="border-b-2 border-gray-700 w-full p-4">
