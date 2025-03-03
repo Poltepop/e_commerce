@@ -47,4 +47,8 @@ class Product extends Model
 
         return $slug;
     }
+
+    public function productCategories(){
+        return $this->belongsToMany(Category::class, 'product_categories', 'product_id','category_id');
+    }
 }
