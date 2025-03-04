@@ -18,6 +18,10 @@ class CategorySeeder extends Seeder
                 'name' => 'FOOD',
                 'slug' => 'food',
             ],
+            [
+                'name' => 'CLOTH',
+                'slug' => 'cloth',
+            ],
         ]);
     }
 }
