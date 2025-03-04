@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,10 +14,12 @@ use Illuminate\Support\Facades\Redirect;
 class ProductController extends Controller
 {
     private ProductService $productService;
+    private CategoryService $categoryService;
 
-    public function __construct(ProductService $productService)
+    public function __construct(ProductService $productService, CategoryService $categoryService)
     {
         $this->productService = $productService;
+        $this->categoryService = $categoryService;
     }
 
     public function product(): Response
@@ -29,7 +33,9 @@ class ProductController extends Controller
 
     public function addProductView(): Response
     {
+       $categories = $this->categoryService->getCategory();
        return response()->view('components.form-input',[
+        'categories' => $categories,
         'title' => 'Form-Create'
        ]);
     }
@@ -37,9 +43,13 @@ class ProductController extends Controller
     public function updateProductView($slug): Response
     {
         $product = Product::where('slug', $slug)->first();
+        $categories = $this->categoryService->getCategory();
+        $selectedCategories = $product->productCategories->pluck('id')->toArray();
         return response()->view('components.form-update', [
             'title' => 'Form-Update',
             'product'=> $product,
+            'categories'=> $categories,
+            'selectedCategory' => $selectedCategories,
         ]);
     }
 
@@ -55,7 +65,11 @@ class ProductController extends Controller
             'status' => 'in:active,inactive',
         ]);
 
-        $this->productService->saveProduct($product);
+        $category = $request->validate([
+            'categories' => 'required|array',
+        ]);
+        
+        $this->productService->saveProduct($product, $category['categories']);
 
         return redirect()->action([ProductController::class, 'product']);
     }
@@ -71,7 +85,11 @@ class ProductController extends Controller
             'status' => 'in:active,inactive',
         ]);
 
-        $this->productService->updateProduct($slug,$product);
+        $categories = $request->validate([
+            'categories' => 'required|array',
+        ]);
+
+        $this->productService->updateProduct($slug,$product, $categories['categories']);
 
         return redirect()->action([ProductController::class, 'product']);
     }
