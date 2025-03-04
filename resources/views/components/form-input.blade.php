@@ -36,6 +36,9 @@
           @error('status')
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror
+          @error('categories')
+          <x-alert-form>Error! {{ $message }}.</x-alert-form>
+          @enderror
 
           <form action="{{ route('save.product') }}" method="post">  
             @csrf
@@ -78,7 +81,12 @@
                       <h1 class="font-bold rounded-lg p-4 ">Image</h1>
                     </div>
                     <div class="p-5">
-                      <input type="file" class="file-input file-input-bordered file-input-lg w-full" />
+                      <label class="form-control w-full">
+                        <div class="label">
+                          <span class="label-text">Add Pitcure Here</span>
+                        </div>
+                        <input type="file" class="file-input file-input-bordered w-full"  accept="image/*">
+                      </label>
                     </div>
                   </div>
                   
@@ -131,20 +139,18 @@
                 <div class="rounded-box flex-col flex-grow place-items-center max-w-xs mt-5">
                   <div class="card rounded-box bg-base-100 h-auto w-full">
                     <div class="border-b-2 w-full border-gray-700">
-                      <h1 class="font-bold rounded-lg p-4">Associations </h1>
+                      <h1 class="font-bold rounded-lg p-4">Categories</h1>
                     </div>
                     <div class="p-5">
-                      <label class="form-control w-full max-w-xs">
-                        <div class="label">
-                          <span class="label-text text-gray-50 text-xs">Category</span>
-                        </div>
-                        <select class="select select-bordered w-full max-w-xs">
-                          <option disabled selected>Small</option>
-                          <option>Small Apple</option>
-                          <option>Small Orange</option>
-                          <option>Small Tomato</option>
-                        </select>
-                      </label>
+                      @foreach ($categories as $category)
+                        
+                      <div class="form-control">
+                        <label class="label cursor-pointer">
+                          <span class="label-text text-gray-50">{{ $category->name }}</span>
+                          <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="checkbox checkbox-accent" />
+                        </label>
+                      </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>
