@@ -7,10 +7,11 @@ use App\Services\ProductService;
 
 class ProductServiceImpl implements ProductService
 {
-    public function saveProduct(array $product): void
+    public function saveProduct(array $product, array $categories): void
     {
-        $product = new Product($product);
-        $product->save();
+        $product = Product::create($product);
+
+        $product->productCategories()->attach($categories);
     }
     
     public function getProduct()
@@ -23,12 +24,19 @@ class ProductServiceImpl implements ProductService
     {
         $product = Product::query()->find($id);
         if($product != null){
+            $product->productCategories;
+            $pivot = $product->pivot;
+            $product->productCategories()->detach($pivot);
             $product->delete();
         }
     }
 
-    public function updateProduct(string $slug,array $product)
+    public function updateProduct(string $slug,array $product, array $categories)
     {
-        return Product::where('slug',$slug)->update($product);
+        Product::where('slug',$slug)->update($product);
+        $product = Product::where('slug', $slug)->first();
+        $product->productCategories()->sync($categories);
+
     }
+
 }
