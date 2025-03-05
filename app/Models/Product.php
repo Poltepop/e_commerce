@@ -51,4 +51,8 @@ class Product extends Model
     public function productCategories(){
         return $this->belongsToMany(Category::class, 'product_categories', 'product_id','category_id')->withPivot('id');
     }
+
+    public function productImage(){
+        return $this->hasOne(products_images::class, 'product_id', 'id');
+    }
 }
