@@ -67,15 +67,15 @@
                   </label>
                 </th>
                 <th>Image</th>
-                <th>Name</th>
-                <th>Slug</th>
+                <th class="pr-[160px]">Name</th>
+                <th class="pr-[160px]">Slug</th>
                 <th>Price</th>
                 <th>Weight</th>
-                <th>Description</th>
-                <th>Short Description</th>
+                <th class="pr-[160px]">Description</th>
+                <th class="pr-[160px]">Short Description</th>
                 <th>Status</th>
-                <th>Creted_at</th>
-                <th>Updated_at</th>
+                <th class="pr-[60px]">Creted_at</th>
+                <th class="pr-[60px]">Updated_at</th>
               </tr>
             </thead>
             <tbody>
@@ -93,21 +93,21 @@
                     <div class="avatar">
                       <div class="mask mask-squircle h-12 w-12">
                         <img
-                          src="https://img.daisyui.com/images/profile/demo/2@94.webp"
+                          src="{{ asset('storage/' . $product->productImage->path) }}"
                           alt="Avatar Tailwind CSS Component" />
                         </div>
                       </div>
                     </div>
                   </td>
-                  <td>{{ $product->name }}</td>
+                  <td width='200'>{{ $product->name }}</td>
                   <td>{{ $product->slug }}</td>
                   <td>{{ $product->price }}</td>
                   <td>{{ $product->weight }}</td>
                   <td>{{ $product->short_description }}</td>
                   <td>{{ $product->description }}</td>
                   <td>{{ $product->status }}</td>
-                  <td>{{ $product->created_at }}</td>
-                  <td>{{ $product->updated_at }}</td>
+                  <td>{{ $product->created_at->diffForhumans() }}</td>
+                  <td>{{ $product->updated_at->diffForhumans() }}</td>
                   <td class="flex mt-3">
                     <form action="{{ route('form.update.product', $product->slug) }}" method="get">
                       <button type="submit" class="btn btn-outline btn-accent btn-xs">Update</button>
