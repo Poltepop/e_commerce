@@ -72,8 +72,8 @@
                       </th>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->slug }}</td>
-                        <td>{{ $category->created_at }}</td>
-                        <td>{{ $category->updated_at }}</td>
+                        <td>{{ $category->created_at->diffForHumans() }}</td>
+                        <td>{{ $category->updated_at->diffForHumans() }}</td>
                         <td class="flex mt-3">
                           <form action="{{ route('form.update.category', $category->slug) }}" method="get">
                             <button type="submit" class="btn btn-outline btn-accent btn-xs">Update</button>
