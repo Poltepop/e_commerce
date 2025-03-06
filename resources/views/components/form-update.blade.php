@@ -4,7 +4,7 @@
         <div class="breadcrumbs text-sm">
             <ul>
               <li><a href="/homepage">Homepage</a></li>
-              <li><a href="/posts">Products</a></li>
+              <li><a href="/products">Products</a></li>
               <li>Update</li>
             </ul>
           </div>
@@ -36,8 +36,11 @@
           @error('status')
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror
+          @error('image')
+          <x-alert-form>Error! {{ $message }}.</x-alert-form>
+          @enderror
 
-          <form action="{{ route('update.product', $product->slug) }}" method="post">  
+          <form action="{{ route('update.product', $product->slug) }}" method="post" enctype="multipart/form-data">  
             @csrf
             <div class="flex">
               {{-- right --}}
@@ -82,7 +85,7 @@
                         <div class="label">
                           <span class="label-text">Add Pitcure Here</span>
                         </div>
-                        <input type="file" class="file-input file-input-bordered w-full"  accept="image/*">
+                        <input name="image" type="file" class="file-input file-input-bordered w-full"  accept="image/*">
                       </label>
                     </div>
                   </div>

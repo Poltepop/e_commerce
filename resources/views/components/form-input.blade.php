@@ -4,7 +4,7 @@
         <div class="breadcrumbs text-sm">
             <ul>
               <li><a href="/homepage">Homepage</a></li>
-              <li><a href="/posts">Products</a></li>
+              <li><a href="/products">Products</a></li>
               <li>Create</li>
             </ul>
           </div>
@@ -40,7 +40,7 @@
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror
 
-          <form action="{{ route('save.product') }}" method="post">  
+          <form action="{{ route('save.product') }}" method="post" enctype="multipart/form-data">  
             @csrf
             <div class="flex">
               {{-- right --}}
@@ -53,7 +53,7 @@
                         <div class="label">
                           <span class="label-text text-gray-50">What is your name product?</span>
                         </div>
-                        <input type="text" name="name" placeholder="Type here" class="input input-bordered w-full max-  w-lg" />
+                        <input type="text" name="name" value="Product-dummy" placeholder="Type here" class="input input-bordered w-full max-  w-lg" />
                       </label>
                       <label class="form-control w-full max-w-lg">
                         <div class="label">
@@ -66,13 +66,13 @@
                       <div class="label">
                         <span class="label-text text-gray-50">Your Description</span>
                       </div>
-                      <textarea name="description" class="textarea textarea-bordered h-24" placeholder="Description"></textarea>
+                      <textarea name="description" class="textarea textarea-bordered h-24" placeholder="Description">Dummy Description</textarea>
                     </label>
                     <label class="form-control mt-3">
                       <div class="label">
                         <span class="label-text text-gray-50">Short Description</span>
                       </div>
-                      <textarea name="short_description" class="textarea textarea-bordered h-24" placeholder="Description"></textarea>
+                      <textarea name="short_description" class="textarea textarea-bordered h-24" placeholder="Description">Dummy Short Description</textarea>
                     </label>
                   </div>
                   {{-- File Input --}}
@@ -85,7 +85,7 @@
                         <div class="label">
                           <span class="label-text">Add Pitcure Here</span>
                         </div>
-                        <input type="file" class="file-input file-input-bordered w-full"  accept="image/*">
+                        <input name="image" type="file" class="file-input file-input-bordered w-full"  accept="image/*">
                       </label>
                     </div>
                   </div>
@@ -101,13 +101,13 @@
                           <div class="label">
                             <span class="label-text text-gray-50">Price</span>
                           </div>
-                          <input type="text" name="price" placeholder="Price" class="input input-bordered w-full max-w-lg" />
+                          <input type="text" name="price" value="100000.00" placeholder="Price" class="input input-bordered w-full max-w-lg" />
                         </label>
                         <label class="form-control w-full max-w-lg">
                           <div class="label">
                             <span class="label-text text-gray-50">Weight</span>
                           </div>
-                          <input type="text" name="weight" placeholder="Weight" class="input input-bordered w-full max-w-lg" />
+                          <input type="text" name="weight" value="10.00" placeholder="Weight" class="input input-bordered w-full max-w-lg" />
                         </label>
                       </div>
                     </div>
