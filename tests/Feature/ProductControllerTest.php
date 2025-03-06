@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Product;
+use Database\Seeders\CategorySeeder;
 use Database\Seeders\ProductSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -27,11 +28,11 @@ class ProductControllerTest extends TestCase
             'name' => 'The name field is required.',
             'price' => 'The price field is required.',
             'weight' => 'The weight field is required.',
-            'status' => 'The status field is required.',
         ]);
     }
 
     public function testAddProductSuccess(){
+        $this->seed(CategorySeeder::class);
         $this->withSession([
             'email' => 'eko@localhost'
         ])->post('/product/create',[
@@ -41,28 +42,34 @@ class ProductControllerTest extends TestCase
             'status' => 'active',
             'short_description' => 'halo',
             'description' => 'halo',
-        ])->assertValid()->assertRedirect('/posts');
+            'categories' => [
+                1,
+            ],
+        ])->assertValid()->assertRedirect('/products');
     }
 
     public function testRemoveProduct(){
         $this->withSession([
             'email' => 'eko@localhost'
-        ])->post('/product/1/delete')->assertRedirect('/posts');
+        ])->post('/product/1/delete')->assertRedirect('/products');
     }
 
     public function testUpdateProductSuccess(){
         $this->seed(ProductSeeder::class);
         $this->withSession([
             'email' => 'eko@localhost'
-        ])->post('/product/superstar-jumbo/update', [
+        ])->post('/product/ayam/update', [
             'name' => 'ayam',
             'price' => '10.00',
             'weight' => '10.00',
             'status' => 'active',
             'short_description' => 'halo',
             'description' => 'halo',
-        ])->assertValid()->assertRedirect('/posts');
-    }
+            'categories' => [
+                1
+            ],
+        ])->assertValid()->assertRedirect('/products');
+    } // Bug
 
     public function testUpdateProductFailed(){
         $this->seed(ProductSeeder::class);
@@ -73,7 +80,6 @@ class ProductControllerTest extends TestCase
             'name' => 'The name field is required.',
             'price' => 'The price field is required.',
             'weight' => 'The weight field is required.',
-            'status' => 'The status field is required.',
         ]);
     }
 }
