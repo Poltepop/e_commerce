@@ -90,6 +90,20 @@
                     </div>
                   </div>
                   
+                  <div class="card rounded-box bg-base-100 h-auto w-full mt-5">
+                    <div class="border-b-2 w-full  border-gray-700">
+                      <h1 class="font-bold rounded-lg p-4 ">Inventory</h1>
+                    </div>
+                    <div class="p-5">
+                      <label class="form-control w-full">
+                        <div class="label">
+                          <span class="label-text text-gray-50">Quantity</span>
+                        </div>
+                        <input type="text" name="qty" value="100" placeholder="Quantity" class="input input-bordered w-full" />
+                      </label>
+                    </div>
+                  </div>
+
                   {{-- Pricing--}}
                   <div class="card rounded-box bg-base-100 h-auto w-full mt-5">
                     <div class="border-b-2 w-full  border-gray-700">
