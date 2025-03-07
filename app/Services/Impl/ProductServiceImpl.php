@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductServiceImpl implements ProductService
 {
-    public function saveProduct(array $product, array $categories,string $path): void
+    public function saveProduct(array $product, array $categories,string $path, int $qty)
     {
         $product = Product::create($product);
 
@@ -16,6 +16,10 @@ class ProductServiceImpl implements ProductService
 
         $product->productImage()->create([
             'path' => $path
+        ]);
+
+        $product->productInventory()->create([
+            'qty' => $qty
         ]);
 
     }
@@ -43,13 +47,16 @@ class ProductServiceImpl implements ProductService
         }
     }
 
-    public function updateProduct(string $slug,array $product, array $categories, string $path)
+    public function updateProduct(string $slug,array $product, array $categories, string $path, int $qty )
     {
         Product::where('slug',$slug)->update($product);
         $product = Product::where('slug', $slug)->first();
         $product->productCategories()->sync($categories);
         $product->productImage()->update([
             'path' => $path
+        ]);
+        $product->productInventory()->update([
+            'qty' => $qty
         ]);
 
     }
