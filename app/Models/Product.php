@@ -55,4 +55,8 @@ class Product extends Model
     public function productImage(){
         return $this->hasOne(productsImage::class, 'product_id', 'id');
     }
+
+    public function productInventory() {
+        return $this->hasOne(ProductsInventory::class, 'product_id', 'id');
+    }
 }
