@@ -12,13 +12,13 @@ Route::get('/homepage',function(){
     return view('admin.homepage',[
         'title' => 'Homepage',
     ]);
-});
+})->name('homepage');
 
 // Route::get('/posts',function(){
 //     return view('posts');
 // });
 
-Route::controller(ProductController::class)->middleware(['OnlyMemberMiddleware'])->group(function (){
+Route::controller(ProductController::class)->middleware(['auth'])->group(function (){
     route::get('/products', 'product');
     route::get('/product/create', 'addProductView')->name('form.product');
     route::get('/product/{product:slug}/update', 'UpdateProductView')->name('form.update.product');
@@ -29,12 +29,12 @@ Route::controller(ProductController::class)->middleware(['OnlyMemberMiddleware']
 
 
 Route::controller(UserController::class)->group(function(){
-    route::get('/login', 'login')->middleware(['OnlyGuestMiddleware']);  
-    route::post('/login', 'doLogin')->middleware(['OnlyGuestMiddleware']);  
-    route::post('/logout', 'doLogout')->middleware(['OnlyMemberMiddleware']);  
+    route::get('/login', 'login');  
+    route::post('/login', 'doLogin'); 
+    route::post('/logout', 'doLogout');  
 });
 
-Route::controller(CategoryController::class)->middleware(['OnlyMemberMiddleware'])->group(function(){
+Route::controller(CategoryController::class)->middleware(['auth'])->group(function(){
     route::get('/categories','category');
     route::get('/category/create','addCategoryView')->name('form.input.category');
     route::get('/category/{category:slug}/update', 'updateCategoryView')->name('form.update.category');
