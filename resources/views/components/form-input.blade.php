@@ -15,28 +15,7 @@
             <p class="font-light text-sm text-gray-50">Add Your Product here</p>
           </div>
 
-          @error('name')
-          <x-alert-form>Error! {{ $message }}.</x-alert-form>
-          @enderror
-          @error('slug')
-          <x-alert-form>Error! {{ $message }}.</x-alert-form>
-          @enderror
-          @error('price')
-          <x-alert-form>Error! {{ $message }}.</x-alert-form>
-          @enderror
-          @error('weight')
-          <x-alert-form>Error! {{ $message }}.</x-alert-form>
-          @enderror
-          @error('short_description')
-          <x-alert-form>Error! {{ $message }}.</x-alert-form>
-          @enderror
-          @error('description')
-          <x-alert-form>Error! {{ $message }}.</x-alert-form>
-          @enderror
-          @error('status')
-          <x-alert-form>Error! {{ $message }}.</x-alert-form>
-          @enderror
-          @error('categories')
+          @error('required')
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror
 

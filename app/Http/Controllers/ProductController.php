@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -24,8 +25,8 @@ class ProductController extends Controller
 
     public function product(): Response
     {
+
         $product = $this->productService->getproduct()->all();
-        // dd($product);
         return response()->view('admin.products',[
             'title' => 'Products',
             'products' => $product,
@@ -56,17 +57,24 @@ class ProductController extends Controller
 
     public function addProduct(Request $request): RedirectResponse
     {   
-        $product = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|decimal:2',
-            'weight' => 'required|decimal:2',
-            'short_description' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'status' => 'in:active,inactive',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'qty' => 'int',
-            'categories' => 'required|array'
-        ]);
+        try{
+            $product = $request->validate([
+                'name' => 'required|string|max:255',
+                'price' => 'required|decimal:2',
+                'weight' => 'required|decimal:2',
+                'short_description' => 'nullable|string|max:255',
+                'description' => 'nullable|string|max:255',
+                'status' => 'in:active,inactive',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'qty' => 'int',
+                'categories' => 'required|array'
+            ]);
+        }catch(ValidationException $e){
+            $firstError = $e->validator->errors()->first();
+            return back()->withErrors([
+                'required' => $firstError
+            ]);
+        }
 
         $qty = $product['qty'];
         $category = $product['categories'];
@@ -83,17 +91,24 @@ class ProductController extends Controller
 
     public function updateProduct(Request $request, string $slug): RedirectResponse
     {
-        $product = $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|decimal:2',
-            'weight' => 'required|decimal:2',
-            'short_description' => 'nullable|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'status' => 'in:active,inactive',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'qty' => 'int',
-            'categories' => 'required|array',
-        ]);
+        try{
+            $product = $request->validate([
+                'name' => 'required|string|max:255',
+                'price' => 'required|decimal:2',
+                'weight' => 'required|decimal:2',
+                'short_description' => 'nullable|string|max:255',
+                'description' => 'nullable|string|max:255',
+                'status' => 'in:active,inactive',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'qty' => 'int',
+                'categories' => 'required|array'
+            ]);
+        }catch(ValidationException $e){
+            $firstError = $e->validator->errors()->first();
+            return back()->withErrors([
+                'required' => $firstError
+            ]);
+        }
 
         $qty = $product['qty'];
         $categories = $product['categories'];
