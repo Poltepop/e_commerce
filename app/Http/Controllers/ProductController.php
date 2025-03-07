@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Product;
-use App\Models\products_images;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
@@ -60,24 +58,25 @@ class ProductController extends Controller
     {   
         $product = $request->validate([
             'name' => 'required|string|max:255',
-            // 'slug' => 'required|string|max:255',
             'price' => 'required|decimal:2',
             'weight' => 'required|decimal:2',
             'short_description' => 'nullable|string|max:255',
             'description' => 'nullable|string|max:255',
             'status' => 'in:active,inactive',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'qty' => 'int',
+            'categories' => 'required|array'
         ]);
-        unset($product['image']);
+
+        $qty = $product['qty'];
+        $category = $product['categories'];
+
+        unset($product['image'], $product['categories'], $product['qty']);
 
         $path = $request->file('image')->storePublicly('products','public');
         
-
-        $category = $request->validate([
-            'categories' => 'required|array',
-        ]);
         
-        $this->productService->saveProduct($product, $category['categories'], $path );
+        $this->productService->saveProduct($product, $category, $path, $qty );
 
         return redirect()->action([ProductController::class, 'product']);
     }
@@ -91,9 +90,15 @@ class ProductController extends Controller
             'short_description' => 'nullable|string|max:255',
             'description' => 'nullable|string|max:255',
             'status' => 'in:active,inactive',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'qty' => 'int',
+            'categories' => 'required|array',
         ]);
-        unset($product['image']);
+
+        $qty = $product['qty'];
+        $categories = $product['categories'];
+       
+        unset($product['image'], $product['categories'], $product['qty']);
 
         $getProduct = Product::with('productImage')->where('slug', $slug)->first();
         $oldPath = $getProduct->productImage->path;
@@ -105,12 +110,7 @@ class ProductController extends Controller
             $path = $request->file('image')->storePublicly('products','public');
         }
 
-
-        $categories = $request->validate([
-            'categories' => 'required|array',
-        ]);
-
-        $this->productService->updateProduct($slug,$product, $categories['categories'], $path);
+        $this->productService->updateProduct($slug,$product, $categories, $path, $qty);
 
         return redirect()->action([ProductController::class, 'product']);
     }
