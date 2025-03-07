@@ -6,7 +6,10 @@ use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -24,33 +27,36 @@ class UserController extends Controller
         ]);
     }
 
-    public function doLogin(Request $request): Response | RedirectResponse
+    public function doLogin(Request $request)
     {
-        $email = $request->input('email');
-        $password = $request->input('password');
-
-        //Validate Input
-        if(empty($email) || empty($password)){
-            return response()->view('auth.login',[
-                'title' => 'Login',
-                'error' => 'Email Or Password Is Required',
+        try{
+            $credentials = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
             ]);
-        } //If Email Or Password Is Empty
+        }catch(ValidationException $e){
+            $firstError = $e->validator->errors()->first();
+            return back()->withErrors([
+                'required' => $firstError
+            ]);
+        }
 
-        if($this->userService->login($email, $password)){
-            $request->session()->put('email', $email);
-            return redirect('/');
-        }// If Email Or Password Is Correct
+        if($this->userService->login($credentials)){
+            return redirect()->route('homepage');
+        }
 
-        return response()->view('auth.login',[
-            'title' => 'Login',
-            'error' => 'Email Or Pasword Is Wrong'
-        ]);// If Email Or Pasword Is Wrong
+        return back()->withErrors([
+            'wrong' => 'User Or Password Is Wrong'
+        ]);
+
     }
 
     public function doLogout(Request $request): RedirectResponse
     {
-        $request->session()->forget('email');
+        Auth::logout();
+        $request->session()->invalidate(); 
+        $request->session()->regenerateToken(); 
+    
         return redirect('/');
     }
 }

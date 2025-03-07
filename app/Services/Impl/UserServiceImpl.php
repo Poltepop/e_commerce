@@ -6,10 +6,7 @@ use App\Services\UserService;
 use Illuminate\Support\Facades\Auth;
 
 class UserServiceImpl implements UserService {
-    public function login(string $email, string $password){
-        return Auth::attempt([
-            "email" => $email,
-            "password" => $password
-        ]);
+    public function login(array $credentials){
+        return Auth::attempt($credentials);
     }
 }
