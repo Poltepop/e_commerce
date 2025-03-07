@@ -59,4 +59,8 @@ class Product extends Model
     public function productInventory() {
         return $this->hasOne(ProductsInventory::class, 'product_id', 'id');
     }
+
+    public function productsWishlists(){
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id');
+    }
 }
