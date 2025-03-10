@@ -36,6 +36,6 @@ class Category extends Model
     }
 
     public function categoryProducts(){
-        return $this->belongsToMany(Product::class, 'product_categoires','category_id','product_id');
+        return $this->belongsToMany(Product::class, 'product_categories','category_id','product_id')->withPivot('id');
     }
 }
