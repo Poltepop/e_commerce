@@ -19,6 +19,9 @@ class CategoryServiceImpl implements CategoryService
     public function removeCategory(int $id){
         $category = Category::find($id);
         if($category != null){
+            $pivot = $category->pivot;
+            $category->categoryProducts()->detach($pivot);
+
             $category->delete();
         }
     }
