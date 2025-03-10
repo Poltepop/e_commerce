@@ -61,6 +61,6 @@ class Product extends Model
     }
 
     public function productsWishlists(){
-        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id');
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')->withPivot('id');
     }
 }
