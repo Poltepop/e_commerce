@@ -42,6 +42,7 @@ class ProductServiceImpl implements ProductService
             $image = $product->productImage->path;
             Storage::disk('public')->delete($image);
 
+            $product->productsWishlists()->detach($pivot);
 
             $product->delete();
         }
