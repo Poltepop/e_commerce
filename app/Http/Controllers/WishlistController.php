@@ -45,4 +45,9 @@ class WishlistController extends Controller
        $this->wishlistService->saveWishlist($wishlist['check'], $userid);
        return redirect()->action([WishlistController::class, 'wishlist']);
     }
+
+    public function deleteWishlist($id){
+        $this->wishlistService->removeWishlist($id);
+        return redirect()->action([WishlistController::class, 'wishlist']);
+    }
 }
