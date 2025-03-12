@@ -85,7 +85,10 @@
                         <td>{{ $product->name }}</td>
                         <td></td>
                         <td class="flex mt-3">
-                          <button type="submit" class="btn btn-outline btn-error btn-xs">Remove</button>
+                          <form action="{{ route('delete.wishlist', $product->id) }}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-outline btn-error btn-xs">Remove</button>
+                          </form>
                         </td>
                       </tr>
                       @endforeach

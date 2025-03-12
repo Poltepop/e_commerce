@@ -44,4 +44,5 @@ Route::controller(CategoryController::class)->middleware(['auth'])->group(functi
 Route::controller(WishlistController::class)->middleware(['auth'])->group(function(){
     Route::get('/wishlist', 'wishlist');
     Route::post('/wishlist/add', 'addWishlist')->name('add.wishlist');
+    Route::post('/wishlist/{id}/delete', 'deleteWishlist')->name('delete.wishlist');
 });
