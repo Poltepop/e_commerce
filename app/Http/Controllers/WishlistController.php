@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\User;
+use App\Services\ProductService;
 use App\Services\WishlistService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class WishlistController extends Controller
    }
 
     public function wishlist(){
-        $users = User::with('productsWishlists')->get();
+        $users =  $this->wishlistService->getWishlist();
         return response()->view('admin.wishlist', [
             'title' => 'Wishlist',
             'users' => $users
