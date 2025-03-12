@@ -7,6 +7,6 @@ interface WishlistService {
     
     public function getWishlist();
     
-    public function removeWishlist();
+    public function removeWishlist(int $id);
 
 }
