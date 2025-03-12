@@ -34,8 +34,6 @@ class ProductServiceImpl implements ProductService
     {
         $product = Product::query()->find($id);
         if($product != null){
-            $product->productCategories;
-
             $pivot = $product->pivot;
             $product->productCategories()->detach($pivot);
 

@@ -25,7 +25,6 @@ class ProductController extends Controller
 
     public function product(): Response
     {
-
         $product = $this->productService->getproduct()->all();
         return response()->view('admin.products',[
             'title' => 'Products',
