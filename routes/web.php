@@ -27,7 +27,9 @@ Route::controller(ProductController::class)->middleware(['auth'])->group(functio
 
 
 Route::controller(UserController::class)->group(function(){
-    route::get('/login', 'login');  
+    route::get('/login', 'login');
+    route::get('/register', 'formRegisterView');  
+    route::post('/register', 'register')->name('register');  
     route::post('/login', 'doLogin'); 
     route::post('/logout', 'doLogout');  
 });
