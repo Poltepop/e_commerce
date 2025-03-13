@@ -59,4 +59,29 @@ class UserController extends Controller
     
         return redirect('/');
     }
+
+    public function formRegisterView(){
+        return Response()->view('auth.register', [
+            'title' => 'register'
+        ]);
+    }
+
+    public function register(Request $request){
+        try {
+            $credentials = $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email',
+                'password' => 'required'
+            ]);
+        }catch(ValidationException $e){
+            $firstError = $e->validator->errors()->first();
+            return back()->withErrors([
+                'required' => $firstError
+            ]);
+        }
+
+        $this->userService->register($credentials);
+
+        return redirect()->action([UserController::class, 'login']);
+    }
 }
