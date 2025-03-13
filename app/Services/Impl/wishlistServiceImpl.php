@@ -5,6 +5,7 @@ namespace App\Services\Impl;
 use App\Models\Product;
 use App\Models\User;
 use App\Services\WishlistService;
+use Illuminate\Support\Facades\DB;
 
 class wishlistServiceImpl implements WishlistService {
     public function saveWishlist(array $wishlist, int $userid){
@@ -17,11 +18,6 @@ class wishlistServiceImpl implements WishlistService {
     }
 
     public function removeWishlist(int $id){
-        $products = Product::find($id);
-        if($products != null){
-            $pivot = $products->pivot;
-            // return dd($pivot);
-            return $products->productsWishlists()->detach($pivot);
-        }
+        return DB::table('wishlists')->where('id',$id)->delete();
     }
 }
