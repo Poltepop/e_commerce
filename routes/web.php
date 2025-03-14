@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -47,4 +48,9 @@ Route::controller(WishlistController::class)->middleware(['auth'])->group(functi
     Route::get('/wishlist', 'wishlist');
     Route::post('/wishlist/add', 'addWishlist')->name('add.wishlist');
     Route::post('/wishlist/{id}/delete', 'deleteWishlist')->name('delete.wishlist');
+});
+
+Route::controller(CartController::class)->middleware(['auth'])->group(function(){
+    Route::get('/carts', 'carts')->name('carts');
+    Route::post('/carts/add', 'addCart')->name('add.cart');
 });
