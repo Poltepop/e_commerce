@@ -7,4 +7,5 @@ return [
     App\Providers\UserServiceProvider::class,
     App\Providers\WishlistServiceProvider::class,
     App\Providers\wishlistServiceProvider::class,
+    App\Providers\CartServiceProvider::class,
 ];
