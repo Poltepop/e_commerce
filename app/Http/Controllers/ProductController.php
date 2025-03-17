@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductsInventory;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\RedirectResponse;
@@ -23,14 +24,25 @@ class ProductController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function product(): Response
-    {
-        $product = $this->productService->getproduct()->all();
+    public function product(request $request): Response
+    {   
+        $keyword = $request->query('search');
+
+        if($keyword){
+            $product = $this->productService->search($keyword)->all();
+        }else {
+            $product = $this->productService->getproduct()->all();
+        }
+
+        $totalProducts = Product::get()->count();
+        $productInventories = ProductsInventory::sum('qty');
         return response()->view('admin.products',[
             'title' => 'Products',
             'products' => $product,
+            'totalProducts' => $totalProducts,
+            'productInventories' => $productInventories,
         ]);
-    }
+    }   
 
     public function addProductView(): Response
     {
