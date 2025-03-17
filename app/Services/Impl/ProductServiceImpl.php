@@ -60,4 +60,8 @@ class ProductServiceImpl implements ProductService
 
     }
 
+    public function search(string $keyword) {
+        return Product::with('productImage')->where('name', 'like', "%{$keyword}%")->get();
+    }
+
 }
