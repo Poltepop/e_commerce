@@ -65,6 +65,6 @@ class Product extends Model
     }
 
     public function cartItmes(){
-        return $this->belongsToMany(Cart::class, 'cart_itmes', 'product_id','cart_id')->withPivot('id');
+        return $this->belongsToMany(Cart::class, 'cart_items', 'product_id','cart_id')->withPivot('id');
     }
 }
