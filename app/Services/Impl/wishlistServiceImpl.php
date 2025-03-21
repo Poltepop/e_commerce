@@ -14,10 +14,14 @@ class wishlistServiceImpl implements WishlistService {
     }
 
     public function getWishlist(){
-        return User::with('productsWishlists')->get();
+        return Product::with('productsWishlists')->get();
     }
 
     public function removeWishlist(int $id){
         return DB::table('wishlists')->where('id',$id)->delete();
+    }
+
+    public function searchWishlist(string $keyword) {
+        return Product::with('productsWishlists')->where('name', 'like', "%{$keyword}%")->get();
     }
 }

@@ -18,11 +18,19 @@ class WishlistController extends Controller
     $this->wishlistService = $wishlistService;
    }
 
-    public function wishlist(){
-        $users =  $this->wishlistService->getWishlist();
+    public function wishlist(Request $request){
+
+        $keyword = $request->query('search');
+
+        if($keyword != null ){
+            $products = $this->wishlistService->searchWishlist($keyword);
+        }else{
+            $products =  $this->wishlistService->getWishlist();
+        }
+
         return response()->view('admin.wishlist', [
             'title' => 'Wishlist',
-            'users' => $users
+            'products' => $products
         ]);
     }
 

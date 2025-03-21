@@ -12,17 +12,19 @@
             <h1 class="text-4xl mr-5 text-gray-50 font-bold">Wishlist</h1>
 
             <label class="input input-bordered flex items-center gap-2">
-              <input type="text" class="grow" placeholder="Search" />
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                fill="currentColor"
-                class="h-4 w-4 opacity-70">
-                <path
-                  fill-rule="evenodd"
-                  d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-                  clip-rule="evenodd" />
-              </svg>
+              <form action="{{ route('wishlist') }}" class="flex">
+                <input type="text" class="grow" name="search" placeholder="Search" />
+                <button class="border-l-2 border-gray-700 pl-2" type="submit"><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  fill="currentColor"
+                  class="h-4 w-4 opacity-70">
+                  <path
+                    fill-rule="evenodd"
+                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                    clip-rule="evenodd" />
+                </svg></button>
+              </form>
             </label>
 
             <div class="divider divider-horizontal"></div>
@@ -61,8 +63,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($users as $user)
-                    @foreach ($user->productsWishlists as $product)
+                    @foreach ($products as $product)
+                    @foreach ($product->productsWishlists as $user)
                     <!-- row 1 -->
                     <tr>
                       <th>
@@ -85,7 +87,7 @@
                         <td>{{ $product->name }}</td>
                         <td></td>
                         <td class="flex mt-3">
-                          <form action="{{ route('delete.wishlist', $product->pivot->id) }}" method="post">
+                          <form action="{{ route('delete.wishlist', $product->id) }}" method="post">
                             @csrf
                             <button type="submit" class="btn btn-outline btn-error btn-xs">Remove</button>
                           </form>

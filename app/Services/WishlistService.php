@@ -9,4 +9,6 @@ interface WishlistService {
     
     public function removeWishlist(int $id);
 
+    public function searchWishlist(string $keyword);
+
 }
