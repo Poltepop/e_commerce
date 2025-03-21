@@ -34,7 +34,7 @@
             <div class="hidden lg:flex w-full">
               <div class="card h-20 w-full max-w-xs bg-base-100 mr-2 p-3 pl-8 justify-center">
                 <p class="text-gray-400 text-[13px]">Total Carts</p>
-                <h1 class="font-bold  text-[30px]">50</h1>
+                <h1 class="font-bold  text-[30px]">{{ $totalCarts }}</h1>
               </div>
             </div>
           <div class="join flex items-end">

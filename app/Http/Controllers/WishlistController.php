@@ -8,6 +8,7 @@ use App\Services\ProductService;
 use App\Services\WishlistService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class WishlistController extends Controller
@@ -21,7 +22,8 @@ class WishlistController extends Controller
     public function wishlist(Request $request){
 
         $keyword = $request->query('search');
-
+        $totalWishlists = DB::table('wishlists')->get()->count();
+ 
         if($keyword != null ){
             $products = $this->wishlistService->searchWishlist($keyword);
         }else{
@@ -30,7 +32,8 @@ class WishlistController extends Controller
 
         return response()->view('admin.wishlist', [
             'title' => 'Wishlist',
-            'products' => $products
+            'products' => $products,
+            'totalWishlists' => $totalWishlists,
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Services\CategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
@@ -17,6 +18,7 @@ class CategoryController extends Controller
     public function category(Request $request){
 
         $keyword = $request->query('search');
+        $totalCategories = DB::table('categories')->get()->count();
 
         if($keyword != null ){
             $category = $this->categoryService->searchCategory($keyword);
@@ -28,6 +30,7 @@ class CategoryController extends Controller
         return response()->view('admin.category',[
             'title' => 'Category',
             'categories'=> $category,
+            'totalCategories' => $totalCategories
         ]);
     }
 

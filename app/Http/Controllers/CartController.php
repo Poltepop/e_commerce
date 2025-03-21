@@ -27,10 +27,12 @@ class CartController extends Controller
             $carts = Cart::with(['cartItems', 'userCart'])->get();
         }
 
+        $totalCart = DB::table('cart_items')->get()->count();
         $carts = Cart::with(['cartItems', 'userCart'])->get();
         return Response()->view('admin.carts', [
             'title' => 'carts',
             'carts' => $carts,
+            'totalCarts' => $totalCart
         ]);
     }
 
