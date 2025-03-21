@@ -23,17 +23,15 @@ class CartController extends Controller
     public function carts(Request $request) {
         $keyword = $request->query('search');
         if ($keyword !== null) {
-            Cart::$keyword = $keyword;
+            $carts = $this->cartService->searchCart($keyword);
+        }else {
+            $carts = Cart::with(['cartItems', 'userCart'])->get();
         }
-        $searchResult = Cart::with(['cartItems', 'userCart'])
-            ->whereHas('cartItems', function($query) use ($keyword){
-                $query->where('name', 'LIKE', "%$keyword%");
-        })->get();
+        
 
-        $carts = Cart::with(['cartItems', 'userCart'])->get();
         return Response()->view('admin.carts', [
             'title' => 'carts',
-            'carts' => empty($keyword) ? $carts : $searchResult,
+            'carts' => $carts,
         ]);
     }
 

@@ -22,4 +22,13 @@ class CartServiceImpl implements CartService {
         return DB::table('cart_items')->where('id', $id)->delete();
     }
 
+    public function searchCart(string $keyword){
+        Cart::$keyword = $keyword;
+
+        return Cart::with(['cartItems', 'userCart'])
+        ->whereHas('cartItems', function($query) use ($keyword){
+            $query->where('name', 'LIKE', "%$keyword%");
+        })->get();
+    }
+
 }
