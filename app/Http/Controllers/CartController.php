@@ -30,10 +30,6 @@ class CartController extends Controller
                 $query->where('name', 'LIKE', "%$keyword%");
         })->get();
 
-        if ($keyword !== null) {
-            // dd($searchResult->all());
-        }
-
         $carts = Cart::with(['cartItems', 'userCart'])->get();
         return Response()->view('admin.carts', [
             'title' => 'carts',
