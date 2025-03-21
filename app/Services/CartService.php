@@ -10,5 +10,4 @@ interface CartService{
 
     public function removeCartItems(int $id);
     
-    public function searchCart(string $keyword);
 }

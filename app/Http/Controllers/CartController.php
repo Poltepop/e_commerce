@@ -23,7 +23,8 @@ class CartController extends Controller
     public function carts(Request $request) {
         $keyword = $request->query('search');
         if ($keyword !== null) {
-            $carts = $this->cartService->searchCart($keyword);
+            Cart::$keyword = $keyword;
+            $carts = Cart::with(['cartItems', 'userCart'])->get();
         }else {
             $carts = Cart::with(['cartItems', 'userCart'])->get();
         }
