@@ -36,7 +36,7 @@ Route::controller(UserController::class)->group(function(){
 });
 
 Route::controller(CategoryController::class)->middleware(['auth'])->group(function(){
-    route::get('/categories','category');
+    route::get('/categories','category')->name('category');
     route::get('/category/create','addCategoryView')->name('form.input.category');
     route::get('/category/{category:slug}/update', 'updateCategoryView')->name('form.update.category');
     route::post('/category/create', 'addCategory')->name('save.category');

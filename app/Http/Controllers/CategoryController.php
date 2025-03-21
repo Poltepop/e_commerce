@@ -14,8 +14,17 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function category(){
-        $category = $this->categoryService->getCategory();
+    public function category(Request $request){
+
+        $keyword = $request->query('search');
+
+        if($keyword != null ){
+            $category = $this->categoryService->searchCategory($keyword);
+        }else {
+            $category = $this->categoryService->getCategory();
+        }
+
+
         return response()->view('admin.category',[
             'title' => 'Category',
             'categories'=> $category,

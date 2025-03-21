@@ -29,4 +29,8 @@ class CategoryServiceImpl implements CategoryService
     public function updateCategory(string $slug, array $category){
         return Category::where('slug',$slug)->update($category);
     }
+
+    public function searchCategory(string $keyword) {
+        return Category::where('name', 'like', "%{$keyword}%")->get();
+    }
 }

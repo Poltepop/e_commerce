@@ -11,4 +11,6 @@ interface CategoryService
     public function removeCategory(int $id);
     
     public function updateCategory(string $slug, array $category);
+
+    public function searchCategory(string $keyword);
 }
