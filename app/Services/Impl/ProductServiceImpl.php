@@ -43,6 +43,9 @@ class ProductServiceImpl implements ProductService
             }
 
             $product->productsWishlists()->detach($pivot);
+
+            $product-> cartItmes()->detach($pivot);
+            
             $product->delete();
 
         }

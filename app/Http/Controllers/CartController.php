@@ -25,11 +25,9 @@ class CartController extends Controller
         if ($keyword !== null) {
             Cart::$keyword = $keyword;
             $carts = Cart::with(['cartItems', 'userCart'])->get();
-        }else {
-            $carts = Cart::with(['cartItems', 'userCart'])->get();
         }
-        
 
+        $carts = Cart::with(['cartItems', 'userCart'])->get();
         return Response()->view('admin.carts', [
             'title' => 'carts',
             'carts' => $carts,
@@ -62,11 +60,12 @@ class CartController extends Controller
         }
 
 
-        if($cart){
+        if($cart != null){
             $this->cartService->addCartItmes($product['id'], $cart->id);
         }else{
             $this->cartService->addCart($userId);
-            $cartId = $cart?->id;
+            $cart = Cart::where('user_id', $userId)->first();
+            $cartId = $cart->id;
             $this->cartService->addCartItmes($productId, $cartId);
         }
 
