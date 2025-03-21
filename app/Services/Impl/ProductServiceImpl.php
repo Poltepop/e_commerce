@@ -23,7 +23,7 @@ class ProductServiceImpl implements ProductService
         ]);
 
     }
-    
+
     public function getProduct()
     {
         // return Product::query()->get()->toArray();
@@ -37,12 +37,14 @@ class ProductServiceImpl implements ProductService
             $pivot = $product->pivot;
             $product->productCategories()->detach($pivot);
 
-            $image = $product->productImage->path;
-            Storage::disk('public')->delete($image);
+            $image = $product->productImage?->path;
+            if ($image !== null) {
+                Storage::disk('public')->delete($image);
+            }
 
             $product->productsWishlists()->detach($pivot);
-
             $product->delete();
+
         }
     }
 

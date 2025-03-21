@@ -19,7 +19,7 @@
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror
 
-          <form action="{{ route('update.product', $product->slug) }}" method="post" enctype="multipart/form-data">  
+          <form action="{{ route('update.product', $product->slug) }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="flex">
               {{-- right --}}
@@ -78,11 +78,11 @@
                         <div class="label">
                           <span class="label-text text-gray-50">Quantity</span>
                         </div>
-                        <input type="text" name="qty" value="{{ $product->productInventory->qty }}" placeholder="Quantity" class="input input-bordered w-full" />
+                        <input type="text" name="qty" value="{{ $product?->productInventory?->qty }}" placeholder="Quantity" class="input input-bordered w-full" />
                       </label>
                     </div>
                   </div>
-                  
+
                   {{-- Pricing--}}
                   <div class="card rounded-box bg-base-100 h-auto w-full mt-5">
                     <div class="border-b-2 w-full  border-gray-700">
@@ -105,7 +105,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <div class="flex-row mt-5">
                     <button class="btn btn-sm btn-outline btn-accent">Update</button>
                     <a href="/products" class="btn btn-sm btn-outline btn-error">Cencel</a>
@@ -136,7 +136,7 @@
                     </div>
                     <div class="p-5">
                       @foreach ($categories as $category)
-                        
+
                       <div class="form-control">
                         <label class="label cursor-pointer">
                           <span class="label-text text-gray-50">{{ $category->name }}</span>

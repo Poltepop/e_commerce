@@ -20,11 +20,24 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function carts() {
+    public function carts(Request $request) {
+        $keyword = $request->query('search');
+        if ($keyword !== null) {
+            Cart::$keyword = $keyword;
+        }
+        $searchResult = Cart::with(['cartItems', 'userCart'])
+            ->whereHas('cartItems', function($query) use ($keyword){
+                $query->where('name', 'LIKE', "%$keyword%");
+        })->get();
+
+        if ($keyword !== null) {
+            // dd($searchResult->all());
+        }
+
         $carts = Cart::with(['cartItems', 'userCart'])->get();
         return Response()->view('admin.carts', [
             'title' => 'carts',
-            'carts' => $carts,
+            'carts' => empty($keyword) ? $carts : $searchResult,
         ]);
     }
 
@@ -45,25 +58,25 @@ class CartController extends Controller
         $productId = $product['id'];
         $duplicate = DB::table('cart_items')
         ->where('product_id', $productId)
-        ->where('cart_id', $cart->id)->exists();
+        ->where('cart_id', $cart?->id)->exists();
 
         if($duplicate){
             return back()->withErrors([
                 'duplicate' => 'Product is alr in cart'
-            ]); 
+            ]);
         }
-        
-        
+
+
         if($cart){
             $this->cartService->addCartItmes($product['id'], $cart->id);
         }else{
             $this->cartService->addCart($userId);
-            $cartId = $cart->id;
+            $cartId = $cart?->id;
             $this->cartService->addCartItmes($productId, $cartId);
         }
 
-       
-        
+
+
         return redirect()->action([CartController::class, 'carts']);
 
     }
