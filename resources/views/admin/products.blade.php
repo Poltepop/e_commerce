@@ -66,7 +66,7 @@
             <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
               <li><button>wishlist</button></li>
               <li><a>delete</a></li>
-            </ul>               
+            </ul>
           </div>
           {{-- <button class="btn">wishlist?</button> --}}
           @error('required')
@@ -100,7 +100,7 @@
             </thead>
             <tbody>
               @foreach ($products as $product )
-                
+
               <!-- row 1 -->
               <tr>
                 <th>
@@ -116,7 +116,7 @@
                     <div class="avatar">
                       <div class="mask mask-squircle h-12 w-12">
                         <img
-                          src="{{ asset('storage/' . $product->productImage->path) }}"
+                          src="{{ asset('storage/' . $product->productImage?->path) }}"
                           alt="Avatar Tailwind CSS Component" />
                         </div>
                       </div>

@@ -10,13 +10,14 @@ use Illuminate\Support\Str;
 class Cart extends Model
 {
     // use HasUlids;
+    public static ?string $keyword = null;
     protected $fillable = [
         'user_id',
         'cart_id',
     ];
 
     public $timestamps = false;
-    
+
     protected static function boot(){
         parent::boot();
 
@@ -30,6 +31,10 @@ class Cart extends Model
     }
 
     public function cartItems(){
-        return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')->withPivot('id');
+        if (self::$keyword) {
+            return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')->withPivot('id')->where('name', 'LIKE', '%' . self::$keyword. '%');
+        } else {
+            return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')->withPivot('id');
+        }
     }
 }

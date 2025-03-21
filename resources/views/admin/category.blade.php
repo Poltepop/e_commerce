@@ -10,7 +10,7 @@
           </div>
           <div class="flex pt-4 mb-5 border-b-2 border-gray-700 pb-4">
             <h1 class="text-4xl mr-5 text-gray-50 font-bold">Categories</h1>
-      
+
             <label class="input input-bordered flex items-center gap-2">
               <input type="text" class="grow" placeholder="Search" />
               <svg
@@ -24,7 +24,7 @@
                   clip-rule="evenodd" />
               </svg>
             </label>
-      
+
             <div class="divider divider-horizontal"></div>
             <a href="{{ route('form.input.category') }}" class="btn btn-outline btn-accent mr-2">Create</a>
           </div>
@@ -62,7 +62,7 @@
                   </thead>
                   <tbody>
                     @foreach ($categories as $category )
-                      
+
                     <!-- row 1 -->
                     <tr>
                       <th>
@@ -72,8 +72,8 @@
                       </th>
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->slug }}</td>
-                        <td>{{ $category->created_at->diffForHumans() }}</td>
-                        <td>{{ $category->updated_at->diffForHumans() }}</td>
+                        <td>{{ $category?->created_at?->diffForHumans() }}</td>
+                        <td>{{ $category?->updated_at?->diffForHumans() }}</td>
                         <td class="flex mt-3">
                           <form action="{{ route('form.update.category', $category->slug) }}" method="get">
                             <button type="submit" class="btn btn-outline btn-accent btn-xs">Update</button>

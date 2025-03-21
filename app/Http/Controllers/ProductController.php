@@ -25,7 +25,7 @@ class ProductController extends Controller
     }
 
     public function product(request $request): Response
-    {   
+    {
         $keyword = $request->query('search');
 
         if($keyword){
@@ -42,7 +42,7 @@ class ProductController extends Controller
             'totalProducts' => $totalProducts,
             'productInventories' => $productInventories,
         ]);
-    }   
+    }
 
     public function addProductView(): Response
     {
@@ -52,7 +52,7 @@ class ProductController extends Controller
         'title' => 'Form-Create'
        ]);
     }
-    
+
     public function updateProductView($slug): Response
     {
         $product = Product::where('slug', $slug)->first();
@@ -67,7 +67,7 @@ class ProductController extends Controller
     }
 
     public function addProduct(Request $request): RedirectResponse
-    {   
+    {
         try{
             $product = $request->validate([
                 'name' => 'required|string|max:255',
@@ -93,8 +93,8 @@ class ProductController extends Controller
         unset($product['image'], $product['categories'], $product['qty']);
 
         $path = $request->file('image')->storePublicly('products','public');
-        
-        
+
+
         $this->productService->saveProduct($product, $category, $path, $qty );
 
         return redirect()->action([ProductController::class, 'product']);
@@ -123,11 +123,11 @@ class ProductController extends Controller
 
         $qty = $product['qty'];
         $categories = $product['categories'];
-       
+
         unset($product['image'], $product['categories'], $product['qty']);
 
         $getProduct = Product::with('productImage')->where('slug', $slug)->first();
-        $oldPath = $getProduct->productImage->path;
+        $oldPath = $getProduct->productImage?->path ?? '';
 
         if($request->hasFile('image')){
             if(Storage::disk('public')->exists($oldPath)){

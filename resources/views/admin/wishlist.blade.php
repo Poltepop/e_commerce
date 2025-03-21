@@ -10,7 +10,7 @@
           </div>
           <div class="flex pt-4 mb-5 border-b-2 border-gray-700 pb-4">
             <h1 class="text-4xl mr-5 text-gray-50 font-bold">Wishlist</h1>
-      
+
             <label class="input input-bordered flex items-center gap-2">
               <input type="text" class="grow" placeholder="Search" />
               <svg
@@ -24,7 +24,7 @@
                   clip-rule="evenodd" />
               </svg>
             </label>
-      
+
             <div class="divider divider-horizontal"></div>
             <a href="{{ route('form.input.category') }}" class="btn btn-outline btn-accent mr-2">Create</a>
           </div>
@@ -75,7 +75,7 @@
                             <div class="avatar">
                               <div class="mask mask-squircle h-12 w-12">
                                 <img
-                                  src="{{ asset('storage/' . $product->productImage->path) }}"
+                                  src="{{ asset('storage/' . $product?->productImage?->path) }}"
                                   alt="Avatar Tailwind CSS Component" />
                                 </div>
                               </div>
