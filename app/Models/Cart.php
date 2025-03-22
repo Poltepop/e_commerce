@@ -14,6 +14,9 @@ class Cart extends Model
     protected $fillable = [
         'user_id',
         'cart_id',
+        'qty',
+        'variant',
+
     ];
 
     public $timestamps = false;

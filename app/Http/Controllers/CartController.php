@@ -46,8 +46,11 @@ class CartController extends Controller
 
     public function addCart(Request $request){
         try{
-            $product = $request->validate([
-                'id' => 'required'
+            $variant = $request->validate([
+                'id' => 'required',
+                'qty' => 'required|int',
+                'size' => 'nullable|string|max:10',
+                'colors' => 'nullable|string|max:100'
             ]);
         }catch(ValidationException $e){
             $firstError = $e->validator->errors()->first();
@@ -56,9 +59,17 @@ class CartController extends Controller
             ]);
         }
 
+        $variantDetail = [
+            'colors' => $variant['colors'],
+            'size' => $variant['size'],
+        ];
+
+        $productQty = $variant['qty'];
+        $productId = $variant['id'];
+        unset($variant['qty'], $variant['id']);
+
         $userId = Auth::user()->id;
         $cart = Cart::where('user_id', $userId)->first();
-        $productId = $product['id'];
         $duplicate = DB::table('cart_items')
         ->where('product_id', $productId)
         ->where('cart_id', $cart?->id)->exists();
@@ -71,12 +82,12 @@ class CartController extends Controller
 
 
         if($cart != null){
-            $this->cartService->addCartItmes($product['id'], $cart->id);
+            $this->cartService->addCartItmes($productId, $cart->id, $productQty, $variantDetail);
         }else{
             $this->cartService->addCart($userId);
             $cart = Cart::where('user_id', $userId)->first();
             $cartId = $cart->id;
-            $this->cartService->addCartItmes($productId, $cartId);
+            $this->cartService->addCartItmes($productId, $cartId, $productQty, $variantDetail);
         }
 
 

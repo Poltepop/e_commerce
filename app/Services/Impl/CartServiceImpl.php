@@ -13,9 +13,12 @@ class CartServiceImpl implements CartService {
         ]);
     }
 
-    public function addCartItmes(int $productId, int $cartId){
+    public function addCartItmes(int $productId, int $cartId, int $qty, ?array $variant){
         $cart = Cart::find($cartId);
-        return $cart->cartItems()->attach($productId);
+        return $cart->cartItems()->attach($productId, [
+            'qty' => $qty,
+            'variant' =>  json_encode($variant)
+        ]);
     }
 
     public function removeCartItems(int $id) {
