@@ -15,6 +15,9 @@
             <p class="font-light text-sm text-gray-50">Create Carts detail</p>
           </div>
 
+          @error('required')
+          <x-alert-form>Error! {{ $message }}.</x-alert-form>
+          @enderror
           <form action="{{ route('add.cart') }}" method="post">
           @csrf
           <input type="hidden" name="id" value="{{ $product->id }}">
