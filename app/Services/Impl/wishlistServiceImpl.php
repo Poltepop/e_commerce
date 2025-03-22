@@ -18,7 +18,7 @@ class wishlistServiceImpl implements WishlistService {
     }
 
     public function removeWishlist(int $id){
-        return DB::table('wishlists')->where('id',$id)->delete();
+        return DB::table('wishlists')->where('product_id',$id)->delete();
     }
 
     public function searchWishlist(string $keyword) {

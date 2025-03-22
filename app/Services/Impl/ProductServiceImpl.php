@@ -34,17 +34,16 @@ class ProductServiceImpl implements ProductService
     {
         $product = Product::query()->find($id);
         if($product != null){
-            $pivot = $product->pivot;
-            $product->productCategories()->detach($pivot);
+            $product->productCategories()->detach();
 
             $image = $product->productImage?->path;
             if ($image !== null) {
                 Storage::disk('public')->delete($image);
             }
 
-            $product->productsWishlists()->detach($pivot);
+            $product->productsWishlists()->detach();
 
-            $product-> cartItmes()->detach($pivot);
+            $product-> cartItmes()->detach();
             
             $product->delete();
 
