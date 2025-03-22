@@ -36,6 +36,14 @@ class CartController extends Controller
         ]);
     }
 
+    public function addCartView($id){
+        $product = DB::table('products')->where('id', $id)->first();
+        return response()->view('components.form-input-cart', [
+            'title' => 'add cart',
+            'product' => $product
+        ]);
+    }
+
     public function addCart(Request $request){
         try{
             $product = $request->validate([

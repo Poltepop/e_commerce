@@ -52,6 +52,7 @@ Route::controller(WishlistController::class)->middleware(['auth'])->group(functi
 
 Route::controller(CartController::class)->middleware(['auth'])->group(function(){
     Route::get('/carts', 'carts')->name('carts');
+    route::get('/carts/{id}/add', 'addCartView')->name('add.cart.view');
     Route::post('/carts/add', 'addCart')->name('add.cart');
     Route::post('/cart/{id}/delete', 'deleteCart')->name('delete.cart');
 });

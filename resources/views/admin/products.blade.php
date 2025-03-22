@@ -139,9 +139,7 @@
                       @csrf
                       <button type="submit" class="btn btn-outline btn-error btn-xs">Remove</button>
                     </form>
-                    <form action="{{ route('add.cart') }}" method="post">
-                      @csrf
-                      <input type="hidden" value="{{ $product->id }}" name="id">
+                    <form action="{{ route('add.cart.view', $product->id) }}" method="get">
                       <button class="btn btn-outline btn-warning btn-xs">Carts</button>
                     </form>
                   </td>
