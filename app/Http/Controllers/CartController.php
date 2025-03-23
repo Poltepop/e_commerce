@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\ProductsInventory;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,8 +65,17 @@ class CartController extends Controller
             'size' => $variant['size'],
         ];
 
+        
         $productQty = $variant['qty'];
         $productId = $variant['id'];
+        $productInvent = ProductsInventory::where('product_id', $productId)->first()->qty;  
+
+        if($productQty > $productInvent){
+            return back()->withErrors([
+                'enough' => 'Stock is not enough'
+            ]);
+        }
+
         unset($variant['qty'], $variant['id']);
 
         $userId = Auth::user()->id;

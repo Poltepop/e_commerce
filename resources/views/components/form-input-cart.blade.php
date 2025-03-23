@@ -18,6 +18,12 @@
           @error('required')
           <x-alert-form>Error! {{ $message }}.</x-alert-form>
           @enderror
+          @error('enough')
+          <x-alert-form>Error! {{ $message }}.</x-alert-form>
+          @enderror
+          @error('duplicate')
+          <x-alert-form>Error! {{ $message }}.</x-alert-form>
+          @enderror
           <form action="{{ route('add.cart') }}" method="post">
           @csrf
           <input type="hidden" name="id" value="{{ $product->id }}">

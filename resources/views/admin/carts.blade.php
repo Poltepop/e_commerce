@@ -92,7 +92,7 @@
                         <td>{{ $cart->userCart->name }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
-                        <td></td>
+                        <td>{{ $product->pivot->qty }}</td>
                         <td class="flex mt-3">
                               <form action="{{ route('delete.cart', $product->pivot->id) }}" method="post">
                                 @csrf

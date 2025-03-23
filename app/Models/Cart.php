@@ -35,9 +35,9 @@ class Cart extends Model
 
     public function cartItems(){
         if (self::$keyword) {
-            return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')->withPivot('id')->where('name', 'LIKE', '%' . self::$keyword. '%');
+            return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')->withPivot('id')->where('name', 'LIKE', '%' . self::$keyword. '%')->withPivot('id','qty','variant');
         } else {
-            return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')->withPivot('id');
+            return $this->belongsToMany(Product::class, 'cart_items', 'cart_id', 'product_id')->withPivot('id','qty','variant');
         }
     }
 }
