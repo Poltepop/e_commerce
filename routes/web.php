@@ -3,6 +3,7 @@
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WishlistController;
@@ -55,4 +56,10 @@ Route::controller(CartController::class)->middleware(['auth'])->group(function()
     route::get('/carts/{id}/add', 'addCartView')->name('add.cart.view');
     Route::post('/carts/add', 'addCart')->name('add.cart');
     Route::post('/cart/{id}/delete', 'deleteCart')->name('delete.cart');
+});
+
+Route::controller(OrdersController::class)->middleware(['auth'])->group
+(function () {
+    Route::get('/orders', 'orders')->name('order');
+    Route::get('/orders/add', 'addOrdersView')->name('add.orders.view');
 });
