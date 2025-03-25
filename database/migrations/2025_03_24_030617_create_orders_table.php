@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->nullable(false);
-            $table->string('code');
-            $table->string('ref');
+            $table->string('code')->unique();
+            $table->string('ref')->unique();
             $table->string('status')->nullable(false);
             $table->timestamp('order_data')->useCurrent();
             $table->decimal('base_total_price', 10, 2)->nullable(false);
             $table->decimal('discount_amount',10, 2)->nullable(true);
-            $table->decimal('discount_percent',10, 2)->nullable(true);
-            $table->decimal('shipping_cost',10, 2);
+            $table->decimal('discount_percent',2, 1)->nullable(true);
+            $table->decimal('shipping_cost',10, 2)->nullable(true);
             $table->decimal('grand_total',10, 2)->nullable(false);
             $table->text('note')->nullable(true);
             $table->timestamp('deleted_at');
